@@ -6,10 +6,10 @@
     <hr>
     <form method="POST">
         {% csrf_token %}
-        {{ signup_form.as_p}}
+        {{signup_form.as_p}}
         <div>
             <button class="btn btn-outline-info">SignUp</button>
         </div>
-    </form>
+    </form> 
 </section>
 {% endblock content %}

@@ -2,18 +2,33 @@
 
 {% block content %}
 
-<section class="container">    
+<section class="container">
     <h1>Login</h1>
     <hr>
     <form method="POST">
         {% csrf_token %}
-        {{ login_form.as_p }}
-        
+        <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+            <label for="floatingInput">Username</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name='password'>
+            <label for="floatingPassword">Password</label>
+          </div>
+          <br>
         <div>
-            <button class="btn btn-outline-info">login</button>
+            <button class="btn btn-outline-primary">login</button>
         </div>
-        
+        <br>
     </form>
+    <div>
+        <a href="{% url 'account:signup' %}"><button class="btn btn-outline-info">SignUp</button></a>
+    </div>
+    <hr>
+    {% load socialaccount %}
+    <div>
+        <a href="{% provider_login_url "naver" %}">Naver</a>
+    </div>
 </section>
 
 {% endblock content %}
