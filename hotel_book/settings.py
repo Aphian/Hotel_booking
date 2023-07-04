@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,14 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    # social login
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.kakao',
 
+    # 3rd
     'django_extensions',
-    
+    'bootstrap5',
+
+    # my_app
     'accounts',
     'hotel_booking',
 ]
@@ -63,10 +67,28 @@ SOCIALACCOUNT_PROVIDERS = {
                         'secret': '',
                         'key': ''
                 }},
+
+    'google': {'APP': {
+                        'client_id': '', 
+                        'secret': '', 
+                        'key': ''
+                }},
+
+    'kakao': {'APP': {
+                        'client_id': '', 
+                        'secret': '', 
+                        'key': ''
+                }},
+
 }
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
