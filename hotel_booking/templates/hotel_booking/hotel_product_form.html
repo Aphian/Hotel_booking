@@ -3,11 +3,11 @@
 {% block content %}
 
 <section class="container">
-    <h1>New Hotel Info</h1>
+    <h1>Hotel Product</h1>
     <hr>
     <form method='POST'>
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ products_form.as_p }}
         
         <div>
             <button class="btn btn-outline-success">Register</button>
@@ -15,6 +15,5 @@
     </form>
 </section>
 
-
-
 {% endblock content %}
+

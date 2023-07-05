@@ -1,0 +1,15 @@
+{% if user == hotel_info.user %}
+<section class="container">
+    <div class="row g-3 align-items-center">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="{% url 'hotel:update_hotel_info' hotel_info.pk %}">
+                <button class="btn btn-outline-info">Edit</button>
+            </a>
+            <form action="{% url 'hotel:delete_hotel_info' hotel_info.pk %}" method='POST'>
+                {% csrf_token %}
+                <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endif %}

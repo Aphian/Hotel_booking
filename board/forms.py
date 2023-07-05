@@ -14,4 +14,4 @@ class AdminBoardForm(forms.ModelForm):
 
     class Meta:
         model = AdminBoard
-        field = ['title', 'content']
+        field = ('title', 'content')

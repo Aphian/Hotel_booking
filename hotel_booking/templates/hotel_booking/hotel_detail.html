@@ -4,13 +4,23 @@
 
 <section class="container">
 
-    <h1> {{ hotel_info.hotel_name }} </h1>
+    <h1> {{ hotel_info.name }} </h1> 
+    <h2> {{ avg_score }} </h2>
     <hr>
     
     <h2> Registered Person - {{ hotel_info.user.username }}</h2>
     <hr>
     
-    <p>{{ hotel_info.hotel_info | linebreaks }}</p>
+    <p>{{ hotel_info.info | linebreaks }}</p>
+    <hr>
+    <p>{{ hotel_info.checkin|date:'Y-m-d'}} ~ {{ hotel_info.checkout|date:'Y-m-d'}}</p>
+    <hr>
+
+    {% include 'hotel_booking/hotel_product_ui.html' %}
+
+    {% include 'hotel_booking/hotel_detail_ui.html' %}
+
+    {% include 'hotel_booking/hotel_detail_reviews_ui.html' %}
     
 </section>
 

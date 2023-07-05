@@ -27,7 +27,10 @@ urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('hotel_accounts/', include('accounts.urls')),
+
     path('hotel/', include('hotel_booking.urls')),
 
+    path('booking/', include('booking.urls')),
+
     path('accounts/', include('allauth.urls')),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+]

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # my_app
     'accounts',
     'hotel_booking',
+    'booking',
 ]
 
 SITE_ID = 1
@@ -63,8 +64,8 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {'APP': {
-                        'client_id': '',
-                        'secret': '',
+                        'client_id': 'qSWfCW2NqcqIR4COpXWE',
+                        'secret': 'vXB30DoH5P',
                         'key': ''
                 }},
 
@@ -86,9 +87,6 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
-
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
