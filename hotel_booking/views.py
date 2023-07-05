@@ -11,9 +11,11 @@ from django.db.models import Avg, Min
 def hotel_info(request):
     hotel_infoes = HotelInfo.objects.all()
     min_price = HotelProduct.objects.filter(info_id=hotel_infoes[0]).aggregate(min_price=Min("price"))
+    avg_score = HotelReviews.objects.filter(info_id=hotel_infoes[0]).aggregate(avg_score=Avg("score"))
     return render(request, 'hotel_booking/hotel_info.html', {
         'hotel_infoes' : hotel_infoes,
         'product_min_price' : min_price['min_price'],
+        'avg_score' : avg_score['avg_score'],
     })
 
 @login_required
