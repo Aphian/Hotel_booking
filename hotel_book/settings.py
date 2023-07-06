@@ -59,8 +59,8 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {'APP': {
-                        'client_id': '',
-                        'secret': '',
+                        'client_id': 'qSWfCW2NqcqIR4COpXWE',
+                        'secret': 'vXB30DoH5P',
                         'key': ''
                 }},
 }

@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from . models import HotelInfo
 
+# @login_required
 def hotel_info(request):
-    return render(request, 'hotel_booking/info.html')
+    return render(request, 'accounts/login.html')
 
 
 
