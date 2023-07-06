@@ -36,5 +36,14 @@
         <hr>
     </div>
     {% endif %}
+    <div class="row g-3 align-items-center">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <form action="{% url 'booking:create_book' product.pk %}" method='POST'>
+                {% csrf_token %}
+                <button class="btn btn-outline-info">Book</button>
+            </form>
+        </div>
+        <hr>
+    </div>
     {% endfor %}
 </div>

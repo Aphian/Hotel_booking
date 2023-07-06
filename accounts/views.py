@@ -42,3 +42,12 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('home')
+
+@login_required
+@require_http_methods(['GET', 'POST'])
+def profile(request, username):
+    profile_user = get_object_or_404(User, username=username)
+
+    return render(request, 'accounts/profile.html', {
+        'profile' : profile_user,
+    })
