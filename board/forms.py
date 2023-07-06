@@ -8,10 +8,10 @@ class AdminBoardForm(forms.ModelForm):
     )
 
     content = forms.CharField(
-        max_length=2,
+        max_length=200,
         widget=forms.Textarea()
     )
 
     class Meta:
         model = AdminBoard
-        field = ('title', 'content')
+        fields = ('title', 'content', )

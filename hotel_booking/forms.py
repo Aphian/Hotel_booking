@@ -32,7 +32,7 @@ class HotelInfoForm(forms.ModelForm):
 
     class Meta:
         model = HotelInfo
-        exclude = ('user', )
+        exclude = ('user', 'score', 'price', )
 
 class HotelReviewForm(forms.ModelForm):
     content = forms.CharField(
@@ -43,6 +43,7 @@ class HotelReviewForm(forms.ModelForm):
 
     score = forms.FloatField(
         min_value=0.0,
+        max_value=5.0,
         widget=forms.TextInput(attrs={
             'placeholder' : '0.0 ~ 5.0',
         })

@@ -1,3 +1,13 @@
+{% if user == hotel_info.user %}
+<div class="row g-3 align-items-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a href="{% url 'hotel:create_product' hotel_info.pk %}">
+            <button class="btn btn-outline-success">Add</button>
+        </a>
+    </div>
+</div>
+<hr>
+{% endif %}
 <div class="row">
     {% for product in products  %}
     <div class="col-sm-4">
@@ -18,9 +28,6 @@
     {% if user == hotel_info.user %}
     <div class="row g-3 align-items-center">
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="{% url 'hotel:create_product' hotel_info.pk %}">
-                <button class="btn btn-outline-success">Add</button>
-            </a>
             <form action="{% url 'hotel:delete_product' hotel_info.pk product.pk %}" method='POST'>
                 {% csrf_token %}
                 <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
@@ -31,4 +38,3 @@
     {% endif %}
     {% endfor %}
 </div>
-<hr>

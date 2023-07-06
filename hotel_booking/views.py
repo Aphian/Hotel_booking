@@ -10,12 +10,9 @@ from django.db.models import Avg, Min
 @require_safe
 def hotel_info(request):
     hotel_infoes = HotelInfo.objects.all()
-    min_price = HotelProduct.objects.filter(info_id=hotel_infoes[0]).aggregate(min_price=Min("price"))
-    avg_score = HotelReviews.objects.filter(info_id=hotel_infoes[0]).aggregate(avg_score=Avg("score"))
+
     return render(request, 'hotel_booking/hotel_info.html', {
         'hotel_infoes' : hotel_infoes,
-        'product_min_price' : min_price['min_price'],
-        'avg_score' : avg_score['avg_score'],
     })
 
 @login_required
@@ -40,8 +37,21 @@ def detail_hotel_info(request, hotel_info_pk):
     hotel_info = get_object_or_404(HotelInfo, pk=hotel_info_pk)
     reviews = hotel_info.reviews.all()
     products = hotel_info.products.all()
+    score = 0.0
+    price = 0
   
     avg_score = HotelReviews.objects.filter(info_id=hotel_info.pk).aggregate(avg_score=Avg("score"))
+    min_price = HotelProduct.objects.filter(info_id=hotel_info.pk).aggregate(min_price=Min("price"))
+
+    if avg_score['avg_score'] != None:
+        score = avg_score['avg_score']
+
+    if min_price['min_price'] != None:
+        price = min_price['min_price']
+
+    hotel_info.score = score
+    hotel_info.price = price
+    hotel_info.save()
 
     review_form = HotelReviewForm()
     return render(request, 'hotel_booking/hotel_detail.html', {
@@ -49,7 +59,7 @@ def detail_hotel_info(request, hotel_info_pk):
         'reviews' : reviews,
         'review_form' : review_form,
         'products' : products,
-        'avg_score' : avg_score['avg_score'],
+        'score' : score,
     })
 
 @login_required
@@ -77,8 +87,8 @@ def update_hotel_info(request, hotel_info_pk):
 def delete_hotel_info(request, hotel_info_pk):
     hotel_info = get_object_or_404(HotelInfo, pk=hotel_info_pk)
 
-    if request.method != hotel_info.user:
-        return redirect('hotel:detail_hotel_info', hotel_info_pk)
+    if request.user != hotel_info.user:
+        return redirect('hotel:detail_hotel_info', hotel_info.pk)
     hotel_info.delete()
 
     return redirect('hotel:hotel_info')
@@ -94,7 +104,7 @@ def create_review(request, hotel_info_pk):
         review.info = hotel_info
         review.author = request.user
         review.save()
-        return redirect('hotel:detail_hotel_info', hotel_info_pk)
+        return redirect('hotel:detail_hotel_info', hotel_info.pk)
 
 @login_required
 @require_POST
@@ -103,7 +113,7 @@ def delete_review(request, hotel_info_pk, hotel_review_pk):
     hotel_review = get_object_or_404(HotelReviews, pk=hotel_review_pk)
 
     if request.user != hotel_review.author:
-        return redirect('hotel:detail_hotel_info', hotel_info_pk)
+        return redirect('hotel:detail_hotel_info', hotel_info.pk)
     hotel_review.delete()
 
     return redirect('hotel:detail_hotel_info', hotel_info_pk)
@@ -123,7 +133,7 @@ def create_product(request, hotel_info_pk):
             product.info = hotel_info
             product.user = request.user
             product.save()
-            return redirect('hotel:detail_hotel_info', hotel_info_pk)
+            return redirect('hotel:detail_hotel_info', hotel_info.pk)
     
     return render(request, 'hotel_booking/hotel_product_form.html', {
         'products_form' : product_form,
@@ -134,8 +144,8 @@ def delete_product(request, hotel_info_pk, hotel_product_pk):
     hotel_product = get_object_or_404(HotelProduct, pk=hotel_product_pk)
 
     if request.user != hotel_product.user:
-        return redirect('hotel:detail_hotel_info', hotel_info_pk)
+        return redirect('hotel:detail_hotel_info', hotel_info.pk)
     
     hotel_product.delete()
 
-    return redirect('hotel:detail_hotel_info', hotel_info_pk)
+    return redirect('hotel:detail_hotel_info', hotel_info.pk)

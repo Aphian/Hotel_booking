@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'accounts',
     'hotel_booking',
     'booking',
+    'board',
 ]
 
 SITE_ID = 1
@@ -154,7 +155,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

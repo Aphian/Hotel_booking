@@ -15,6 +15,9 @@
                         <a href="{% url 'hotel:create_hotel_info' %}" class="nav-link active">호텔 등록</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{% url 'board:index_board' %}" class="nav-link active">공지사항</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{% url 'hotel_accounts:logout' %}" class="nav-link active">로그아웃</a>
                     </li>
                     {% else %}

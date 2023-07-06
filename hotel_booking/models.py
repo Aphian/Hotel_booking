@@ -18,6 +18,8 @@ class HotelInfo(models.Model):
     checkin = models.DateField()
     checkout = models.DateField()
     info = models.CharField(max_length=200, default='Hotel_Info')
+    score = models.FloatField(default=0, null=True)
+    price = models.PositiveIntegerField(default=0, null=True)
 
 
 class HotelReviews(models.Model):
@@ -25,10 +27,11 @@ class HotelReviews(models.Model):
                                on_delete=models.CASCADE,
                                related_name='reviews',
                                )
+    
     info = models.ForeignKey(HotelInfo,
-                                   on_delete=models.CASCADE,
-                                   related_name='reviews',
-                                   )
+                            on_delete=models.CASCADE,
+                            related_name='reviews',
+                            )
     
     content = models.CharField(max_length=200)
     score = models.FloatField(default=0.0)
