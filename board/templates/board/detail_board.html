@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container">
+
+    <h1> {{ board.title }} </h1>
+    <hr>
+    
+    <h2> by - {{ board.user.username }}</h2>
+    <hr>
+    
+    <p>{{ board.content | linebreaks }}</p>
+    
+    {% include 'board/detail_ui.html' %}
+    
+</section>
+
+
+{% endblock content %}

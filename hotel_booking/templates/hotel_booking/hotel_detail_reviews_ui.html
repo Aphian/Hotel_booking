@@ -1,0 +1,26 @@
+{% if user.is_authenticated and user != hotel_info.user %}
+<form action="{% url 'hotel:create_review' hotel_info.pk %}" method="POST">
+    {% csrf_token %}
+    {{ review_form.as_p }}
+    <button class="btn btn-outline-success">작성</button>
+</form>
+{% endif %}
+
+<hr>
+
+<ul>
+    {% for review in reviews %}
+    <li>
+    {{ review.author.username }} - {{ review.content }} - {{ review.score }}
+        <!-- {% if user == comment.user or user == article.user%} {% endif %}-->
+        {% if user == review.author %}
+        <form action="{% url 'hotel:delete_review' hotel_info.pk review.pk %}" method = "POST"
+        style="display: inline-block;">
+        {% csrf_token %}
+            <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
+        </form>
+        {% endif %}
+    </li>
+    <br>
+    {% endfor %}
+</ul>

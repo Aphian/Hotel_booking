@@ -5,19 +5,28 @@
                 <a  class="navbar-brand fw-semibold fs-5" href="{% url 'home' %}">Home</a>
                 <ul class="navbar-nav fw-semibold">
                     <li class="nav-item">
-                        <a href="{% url 'hotel:hotel_info' %}" class="nav-link active">예약하러가기</a>
+                        <a href="{% url 'hotel:hotel_info' %}" class="nav-link active">예약</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link active">예약내역</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{% url 'hotel_accounts:signup' %}" class="nav-link active">회원가입</a>
-                    </li> 
-                {% if user.is_authenticated %}
+                        <a href="{% url 'hotel:create_hotel_info' %}" class="nav-link active">호텔 등록</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'board:index_board' %}" class="nav-link active">공지사항</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link active">{{ user }}'s profile</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{% url 'hotel_accounts:logout' %}" class="nav-link active">로그아웃</a>
                     </li>
-                {% else %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'hotel_accounts:signup' %}" class="nav-link active">회원가입</a>
+                    </li> 
                     <li class="nav-item">
                         <a href="{% url 'hotel_accounts:login' %}" class="nav-link active">로그인</a>
                     </li>

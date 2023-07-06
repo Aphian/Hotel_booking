@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from . forms import CustomUserCreationForm
 
-User = get_user_model
+User = get_user_model()
 
 @require_http_methods(['GET', 'POST'])
 def signup(request):
@@ -17,8 +17,9 @@ def signup(request):
         signup_form = CustomUserCreationForm(request.POST)
         if signup_form.is_valid():
             user = signup_form.save()
-            auth_login(request, user)
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
+        
     return render(request, 'accounts/signup.html', {
         'signup_form' : signup_form,
     })
@@ -41,3 +42,12 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('home')
+
+@login_required
+@require_http_methods(['GET', 'POST'])
+def profile(request, username):
+    profile_user = get_object_or_404(User, username=username)
+
+    return render(request, 'accounts/profile.html', {
+        'profile' : profile_user,
+    })

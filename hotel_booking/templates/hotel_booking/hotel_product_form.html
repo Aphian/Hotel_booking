@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container">
+    <h1>Hotel Product</h1>
+    <hr>
+    <form method='POST'>
+        {% csrf_token %}
+        {{ products_form.as_p }}
+        
+        <div>
+            <button class="btn btn-outline-success">Register</button>
+        </div>
+    </form>
+</section>
+
+{% endblock content %}
+

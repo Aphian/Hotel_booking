@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+
+<section class="container">
+    <h1>New Hotel Info</h1>
+    <hr>
+    <form method='POST'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        <div>
+            <button class="btn btn-outline-success">Register</button>
+        </div>
+    </form>
+</section>
+
+
+
+{% endblock content %}
