@@ -2,14 +2,16 @@
 
 {% block content %}
 
-<section class="contaier">
-    <h1>호텔 명</h1>
-    <h2>호텔 상품 명</h2>
+<section class="container">
+    <h1>{{ product.products.name }}</h1>
+    <hr>
+    <h2>{{ product.title }}</h2>
+    <hr>
 
-    <p>{{ book.username }}</p>
-    <p>{{ book.phone }}</p>
-    <p>{{ book.state }}</p>
-    <p>{{ book.use_date }}</p>
+    <p>예약자 명 : {{ book.name }}</p>
+    <p>예약자 번호 : {{ book.phone }}</p>
+    <p>예약 상태{{ book.state }}</p>
+    <p>이용 날짜 {{ book.use_date }}</p>
 </section>
 
 {% endblock content %}
