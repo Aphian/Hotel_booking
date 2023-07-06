@@ -27,10 +27,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('hotel_accounts/', include('accounts.urls')),
-<<<<<<< HEAD
-=======
-
->>>>>>> 23a73a5b43260d871fca9f50d6fb83a1a268d28d
     path('hotel/', include('hotel_booking.urls')),
 
     path('booking/', include('booking.urls')),
