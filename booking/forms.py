@@ -8,7 +8,7 @@ class BookForm(forms.ModelForm):
     )
 
     phone = forms.CharField(
-        min_length=12,
+        min_length=13,
         max_length=20,
         widget= forms.TextInput(attrs={
             'placeholder' : '010-1234-5678'

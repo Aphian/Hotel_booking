@@ -24,6 +24,7 @@ def index_book(request):
 @require_http_methods(['GET', 'POST'])
 def create_book(request, product_pk):
     product = get_object_or_404(HotelProduct, pk=product_pk)
+    # product_date = get_object_or_404
     if request.method == 'GET':
         book_form = BookForm()
     else:
@@ -31,6 +32,7 @@ def create_book(request, product_pk):
         if book_form.is_valid():
             book = book_form.save(commit=False)
             book.user = request.user
+            # book.product = product_pk
             book.save()
             return redirect('booking:detail_book', book.pk)
         

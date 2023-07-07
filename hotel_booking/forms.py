@@ -12,18 +12,6 @@ class HotelInfoForm(forms.ModelForm):
         min_length=0,
     )
 
-    checkin = forms.DateField(
-        widget= forms.DateInput(attrs={
-            'placeholder' : '2023-01-01',
-        })
-    )
-
-    checkout = forms.DateField(
-        widget= forms.DateInput(attrs={
-            'placeholder' : '2023-01-01',
-        })
-    )
-
     info = forms.CharField(
         max_length=200,
         min_length=2,
@@ -65,6 +53,18 @@ class HotelProductForm(forms.ModelForm):
         widget=forms.TextInput()
     )
 
+    checkin = forms.DateField(
+        widget= forms.DateInput(attrs={
+            'placeholder' : '2023-01-01',
+        })
+    )
+
+    checkout = forms.DateField(
+        widget= forms.DateInput(attrs={
+            'placeholder' : '2023-01-01',
+        })
+    )
+
     class Meta:
         model = HotelProduct
-        fields = ('title', 'price', )
+        fields = ('title', 'price', 'checkin', 'checkout', )

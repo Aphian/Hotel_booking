@@ -1,7 +1,7 @@
 {% if user.is_authenticated and user != hotel_info.user %}
 <form action="{% url 'hotel:create_review' hotel_info.pk %}" method="POST">
     {% csrf_token %}
-    {{ review_form.as_p }}
+    {% bootstrap5 review_form %}
     <button class="btn btn-outline-success">작성</button>
 </form>
 {% endif %}
@@ -12,7 +12,6 @@
     {% for review in reviews %}
     <li>
     {{ review.author.username }} - {{ review.content }} - {{ review.score }}
-        <!-- {% if user == comment.user or user == article.user%} {% endif %}-->
         {% if user == review.author %}
         <form action="{% url 'hotel:delete_review' hotel_info.pk review.pk %}" method = "POST"
         style="display: inline-block;">

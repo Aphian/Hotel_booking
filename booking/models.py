@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+from hotel_booking.models import HotelProduct
 # Create your models here.
 
 class Book(models.Model):
@@ -14,3 +15,7 @@ class Book(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
                              related_name='book_user')
+    
+    product = models.ForeignKey(HotelProduct,
+                                on_delete=models.CASCADE,
+                                related_name='book_product',)
