@@ -65,8 +65,8 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {'APP': {
-                        'client_id': 'qSWfCW2NqcqIR4COpXWE',
-                        'secret': 'vXB30DoH5P',
+                        'client_id': '',
+                        'secret': '',
                         'key': ''
                 }},
 
@@ -85,7 +85,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
 
