@@ -3,7 +3,7 @@
 {% block content %}
 
 <section class="container">
-    <h1>{{ product.products.name }}</h1>
+    <h1>{{ hotel.name }}</h1>
     <hr>
     <h2>{{ product.title }}</h2>
     <hr>
@@ -11,7 +11,8 @@
     <p>예약자 명 : {{ book.name }}</p>
     <p>예약자 번호 : {{ book.phone }}</p>
     <p>예약 상태 : {{ book.state }}</p>
-    <p>이용 날짜 : {{ book.use_date }}</p>
+    <p>이용 날짜 : {{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d' }}</p>
+    <p>가격 : {{ product.price }}</p>
 </section>
 
 {% endblock content %}

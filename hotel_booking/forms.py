@@ -26,7 +26,8 @@ class HotelReviewForm(forms.ModelForm):
     content = forms.CharField(
         min_length=2,
         max_length=200,
-        widget=forms.Textarea()
+        label='Review',
+        widget=forms.Textarea(),
     )
 
     score = forms.FloatField(

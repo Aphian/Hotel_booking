@@ -21,6 +21,7 @@
                         {{ product.user.username }}
                     </a>
                 </h6>
+                <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
                 <p class="card-text">{{ product.price }}</p>
             </div>
         </div>

@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from . models import Book
 from . forms import BookForm
 
-from hotel_booking.models import HotelProduct
+from hotel_booking.models import HotelProduct, HotelInfo
 
 User = get_user_model()
 
@@ -15,16 +15,13 @@ User = get_user_model()
 @require_safe
 def index_book(request):
     books = Book.objects.all()
-
     return render(request, 'booking/book_index.html', {
         'books' : books,
     })
 
 @login_required
 @require_http_methods(['GET', 'POST'])
-def create_book(request, product_pk):
-    product = get_object_or_404(HotelProduct, pk=product_pk)
-    # product_date = get_object_or_404
+def create_book(request, product_pk):    
     if request.method == 'GET':
         book_form = BookForm()
     else:
@@ -32,21 +29,24 @@ def create_book(request, product_pk):
         if book_form.is_valid():
             book = book_form.save(commit=False)
             book.user = request.user
-            # book.product = product_pk
+            book.product_id = product_pk
             book.save()
-            return redirect('booking:detail_book', book.pk)
+            return redirect('booking:detail_book', book.pk, product_pk)
         
     return render(request, 'booking/book_form.html', {
         'book_form' : book_form,
-        'product' : product,
     })
 
 @require_safe
-def detail_book(request, book_pk):
+def detail_book(request, book_pk, product_pk):
     book = get_object_or_404(Book, pk=book_pk)
+    product = get_object_or_404(HotelProduct, pk=product_pk)
+    hotel = get_object_or_404(HotelInfo, pk=product.info_id)
 
     return render(request, 'booking/book_detail.html', {
         'book' : book,
+        'product' : product,
+        'hotel' : hotel,
     })
 
 def update_book(requset, book_pk):

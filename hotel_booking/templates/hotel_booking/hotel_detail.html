@@ -12,9 +12,7 @@
     <hr>
     
     <p>{{ hotel_info.info | linebreaks }}</p>
-    <hr>
-    <p>{{ hotel_info.checkin|date:'Y-m-d'}} ~ {{ hotel_info.checkout|date:'Y-m-d'}}</p>
-    <hr>
+    <hr>    
 
     {% include 'hotel_booking/hotel_product_ui.html' %}
 

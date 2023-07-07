@@ -6,6 +6,8 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, get_
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from . forms import CustomUserCreationForm
+from hotel_booking.models import HotelInfo, HotelProduct
+from booking.models import Book
 
 User = get_user_model()
 
@@ -47,7 +49,11 @@ def logout(request):
 @require_http_methods(['GET', 'POST'])
 def profile(request, username):
     profile_user = get_object_or_404(User, username=username)
+    # product = get_object_or_404(HotelProduct, pk=)
+    # hotel = get_object_or_404(HotelInfo, pk=product.info_id)
 
     return render(request, 'accounts/profile.html', {
         'profile' : profile_user,
+        # 'product' : product,
+        # 'product' : hotel,
     })

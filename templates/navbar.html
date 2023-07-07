@@ -7,10 +7,10 @@
                     <li class="nav-item">
                         <a href="{% url 'hotel:hotel_info' %}" class="nav-link active">예약</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active">예약내역</a>
-                    </li>
                     {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'booking:book_index' %}" class="nav-link active">예약내역</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{% url 'hotel:create_hotel_info' %}" class="nav-link active">호텔 등록</a>
                     </li>

@@ -30,6 +30,27 @@
             </div>
         {% endfor %}
     </div>
+    <hr>
+    <h2>예약 목록</h2>
+    <hr>
+    <div class="row">
+        {% for products in profile.book_user.all %}
+            <div class="col-sm-4 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        호텔 이름 : {{ hotel.name }}
+                        <hr>
+                        상품 명 : {{ product.title}}
+                        <hr>
+                        <p>예약자 명 : {{ products.name }} </p>
+                        <p>연락처 : {{ products.phone }}</p>
+                        <hr>
+                        예약 상태 : {{ products.state }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %} 
+    </div>
 
 </section>
 

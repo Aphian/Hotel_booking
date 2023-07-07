@@ -1,7 +1,8 @@
+{% load bootstrap5 %}
 {% if user.is_authenticated and user != hotel_info.user %}
 <form action="{% url 'hotel:create_review' hotel_info.pk %}" method="POST">
     {% csrf_token %}
-    {% bootstrap5 review_form %}
+    {% bootstrap_form review_form %}
     <button class="btn btn-outline-success">작성</button>
 </form>
 {% endif %}
