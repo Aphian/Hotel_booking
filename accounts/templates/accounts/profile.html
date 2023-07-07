@@ -4,54 +4,59 @@
 
 <section class="container">
 
-    <h1>{{ profile.username }} 의 프로필</h1>
+    <h1>{{ profile_user.username }} 의 프로필</h1>
     <hr>
-    <h2>등록 목록</h2>
-    <hr>
-    <div class="row">
-        {% for hotel_infoes in profile.hotel_infoes.all %}
-            <div class="col-sm-4 mb-5">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{% url 'hotel:detail_hotel_info' hotel_infoes.pk %}">
-                            {{ hotel_infoes.name }} 
-                        </a>
-                        <span>평점 : {{ hotel_infoes.score }}</span>
-                        <hr>
-                        {% if hotel_infoes.price == 0 %}
-                            <span>상품이 없습니다.</span>
-                        {% else %}
-                            {% for hotel_products in hotel_infoes.products.all %}
-                                <p class="card-text">{{ hotel_products.title }} : {{ hotel_products.price }}</p>
-                            {% endfor %}
-                        {% endif %}
+    {% for group in user.groups.all %}
+        {% if group.name == 'register' %}
+        <h2>등록 목록</h2>
+        <hr>
+        <div class="row">
+            {% for hotel_infoes in profile_user.hotel_infoes.all %}
+                <div class="col-sm-4 mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{% url 'hotel:detail_hotel_info' hotel_infoes.pk %}">
+                                {{ hotel_infoes.name }} 
+                            </a>
+                            <span>평점 : {{ hotel_infoes.score }}</span>
+                            <hr>
+                            {% if hotel_infoes.price == 0 %}
+                                <span>상품이 없습니다.</span>
+                            {% else %}
+                                {% for hotel_products in hotel_infoes.products.all %}
+                                    <p class="card-text">{{ hotel_products.title }} : {{ hotel_products.price }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-    <hr>
-    <h2>예약 목록</h2>
-    <hr>
-    <div class="row">
-        {% for products in profile.book_user.all %}
-            <div class="col-sm-4 mb-5">
-                <div class="card">
-                    <div class="card-body">
-                        호텔 이름 : {{ hotel.name }}
-                        <hr>
-                        상품 명 : {{ product.title}}
-                        <hr>
-                        <p>예약자 명 : {{ products.name }} </p>
-                        <p>연락처 : {{ products.phone }}</p>
-                        <hr>
-                        예약 상태 : {{ products.state }}
+            {% endfor %}
+        </div>
+        {% elif group.name == 'client'%}
+        <h2>예약 목록</h2>
+        <hr>
+        <div class="row">
+            {% for book in books %}
+                <div class="col-sm-4 mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>호텔 이름 : {{ book.product.info.name }}</p>
+                            <hr>
+                            <p>상품 명 : {{ book.product.title }}</p>
+                            <hr>
+                            <p>예약자 명 : {{ book.name }} </p>
+                            <p>연락처 : {{ book.phone }}</p>
+                            <p>가격 : {{ book.product.price }} 원</p>
+                            <p>이용날짜 : {{ book.product.checkin|date:'Y.m.d' }} ~ {{ book.product.checkout|date:'Y.m.d' }}</p>
+                            <hr>
+                            <p>예약 상태 : {{ book.state }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %} 
-    </div>
-
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endfor %}
 </section>
 
 

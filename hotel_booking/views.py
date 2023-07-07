@@ -18,6 +18,9 @@ def hotel_info(request):
 @login_required
 @require_http_methods(['GET', 'POST'])
 def create_hotel_info(request):
+    if not request.user.groups.filter(name="register").exists():
+        return redirect('home')
+
     if request.method == 'GET':
         create_form = HotelInfoForm()
     else:
@@ -139,6 +142,8 @@ def create_product(request, hotel_info_pk):
         'products_form' : product_form,
     })
 
+@login_required
+@require_POST
 def delete_product(request, hotel_info_pk, hotel_product_pk):
     hotel_info = get_object_or_404(HotelInfo, pk=hotel_info_pk)
     hotel_product = get_object_or_404(HotelProduct, pk=hotel_product_pk)

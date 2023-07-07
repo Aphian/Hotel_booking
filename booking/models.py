@@ -13,8 +13,8 @@ class Book(models.Model):
     # 상품 번호 외래키 모델링
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
-                             related_name='book_user')
+                             related_name='books')
     
     product = models.ForeignKey(HotelProduct,
                                 on_delete=models.CASCADE,
-                                related_name='book_product',)
+                                related_name='books',)

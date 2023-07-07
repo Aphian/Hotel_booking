@@ -48,6 +48,7 @@ class HotelProduct(models.Model):
                              related_name='products',
                              )
     
+
 if __name__ == '__main__':
 
     pass

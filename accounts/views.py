@@ -49,11 +49,10 @@ def logout(request):
 @require_http_methods(['GET', 'POST'])
 def profile(request, username):
     profile_user = get_object_or_404(User, username=username)
-    # product = get_object_or_404(HotelProduct, pk=)
-    # hotel = get_object_or_404(HotelInfo, pk=product.info_id)
+    books = profile_user.books.all()
+
 
     return render(request, 'accounts/profile.html', {
-        'profile' : profile_user,
-        # 'product' : product,
-        # 'product' : hotel,
+        'profile_user' : profile_user,
+        'books': books,
     })

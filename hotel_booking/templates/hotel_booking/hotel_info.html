@@ -13,14 +13,11 @@
                 <div class="card-body">
                     <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
                         <h5 class="card-title"> {{ hotel_info.name }} ({{hotel_info.reviews.count}})</h5>
+                        {{ hotel_info.score }}
                     </a>
-                    <h6>  {{ hotel_info.score }} </h6>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">registed - 
-                        <a href="#">
-                            {{ hotel_info.user.username }}
-                        </a>
-                    </h6>
+                    <hr>
                     <p class="card-text">{{ hotel_info.info }}</p>
+                    <hr>
                     {% if hotel_info.price != 0 %}
                         <span>{{ hotel_info.price }}</span>
                     {% else %}

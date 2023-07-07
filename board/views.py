@@ -18,6 +18,9 @@ def index_board(request):
 @login_required
 @require_http_methods(['GET', 'POST'])
 def create_board(request):
+    if not request.user.groups.filter(name="adminpage").exists():
+        return redirect('home')
+
     if request.method == 'GET': 
         board_form = AdminBoardForm()
     else:

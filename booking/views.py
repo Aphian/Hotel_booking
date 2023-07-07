@@ -21,7 +21,10 @@ def index_book(request):
 
 @login_required
 @require_http_methods(['GET', 'POST'])
-def create_book(request, product_pk):    
+def create_book(request, product_pk):
+    if not request.user.groups.filter(name="client").exists():
+        return redirect('home')
+
     if request.method == 'GET':
         book_form = BookForm()
     else:
