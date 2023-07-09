@@ -33,12 +33,15 @@
             {% endfor %}
         </tbody>
     </table>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
-        <a href="{% url 'board:create_board' %}">
-            <button class="btn btn-outline-dark">Write</button>
-        </a>
-    </div>
-
+    {% for group in user.groups.all %}
+        {% if group.name == 'adminpage' %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+            <a href="{% url 'board:create_board' %}">
+                <button class="btn btn-outline-dark">Write</button>
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
 </section>
 
 {% endblock content %}
