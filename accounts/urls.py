@@ -10,6 +10,8 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
 
+    path('hotel_group_permission', views.social_group, name='social_group'),
+
     path('<str:username>/', views.profile, name='profile'),
 ]
 
