@@ -65,8 +65,8 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {'APP': {
-                        'client_id': '',
-                        'secret': '',
+                        'client_id': 'qSWfCW2NqcqIR4COpXWE',
+                        'secret': 'CIfPzSAqZd',
                         'key': ''
                 }},
 
@@ -86,7 +86,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_URL = '/hotel_accounts/login/'
-LOGIN_REDIRECT_URL = '/hotel_group_permission/'
+LOGIN_REDIRECT_URL = '/hotel_accounts/hotel_group_permission/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
 

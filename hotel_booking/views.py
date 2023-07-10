@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from . models import HotelInfo, HotelReviews, HotelProduct
 from . forms import HotelInfoForm, HotelReviewForm, HotelProductForm
+from booking.models import Book
 
 from django.db.models import Avg, Min
 

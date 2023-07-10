@@ -58,3 +58,17 @@ def profile(request, username):
         'profile_user' : profile_user,
         'books': books,
     })
+
+@login_required
+@require_http_methods(['GET', 'POST'])
+def social_group(request):
+#     user = get_object_or_404(User, request.user)
+
+#     if not request.user.groups.filter(name="client").exists():
+#         group = Group.objects.get(name='client')
+#         user.groups.add(group)
+#         return redirect('home')
+    
+#     auth_login(request, user)
+#     return redirect('home')
+    pass
