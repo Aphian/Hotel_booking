@@ -18,3 +18,4 @@ class Book(models.Model):
     product = models.ForeignKey(HotelProduct,
                                 on_delete=models.CASCADE,
                                 related_name='books',)
+    

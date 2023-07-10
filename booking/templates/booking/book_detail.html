@@ -10,9 +10,28 @@
 
     <p>예약자 명 : {{ book.name }}</p>
     <p>예약자 번호 : {{ book.phone }}</p>
-    <p>예약 상태 : {{ book.state }}</p>
+    {% if book.state == 0 %}
+        <p>예약 상태 : 결제 대기</p>
+    {% elif book.state == 1 %}
+        <p>예약 상태 : 예약 완료</p>
+    {% endif %}
     <p>이용 날짜 : {{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d' }}</p>
     <p>가격 : {{ product.price }}</p>
+    {% if book.state == 1 %}
+        <a href="{% url 'booking:cancle_book' book.pk product.pk %}">
+            <button class="btn btn-outline-danger">결제 취소</button>
+        </a>
+        <a href="{% url 'booking:delete_book' book.pk product.pk %}">
+            <button class="btn btn-outline-danger">예약 취소</button>
+        </a>
+    {% elif book.state == 0 %}
+        <a href="{% url 'booking:update_book' book.pk book.product.pk %}">
+            <button class="btn btn-outline-info">결제 하러 가기</button>
+        </a>
+        <a href="{% url 'booking:delete_book' book.pk product.pk %}">
+            <button class="btn btn-outline-danger">예약 취소</button>
+        </a>
+    {% endif %}
 </section>
 
 {% endblock content %}

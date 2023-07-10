@@ -4,10 +4,11 @@ from django.views.decorators.http import require_http_methods, require_safe, req
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 # Create your views here.
 from . forms import CustomUserCreationForm
-from hotel_booking.models import HotelInfo, HotelProduct
-from booking.models import Book
+# from hotel_booking.models import HotelInfo, HotelProduct
+# from booking.models import Book
 
 User = get_user_model()
 
@@ -19,6 +20,8 @@ def signup(request):
         signup_form = CustomUserCreationForm(request.POST)
         if signup_form.is_valid():
             user = signup_form.save()
+            group = Group.objects.get(name='client')
+            user.groups.add(group)
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
         
@@ -50,7 +53,6 @@ def logout(request):
 def profile(request, username):
     profile_user = get_object_or_404(User, username=username)
     books = profile_user.books.all()
-
 
     return render(request, 'accounts/profile.html', {
         'profile_user' : profile_user,

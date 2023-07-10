@@ -6,27 +6,46 @@
     <h1>Book List</h1>
     <hr>
     <div class="row">
-        {% for book in books.product  %}
-        <div class="col-sm-4 mb-5">
-            <div class="card">
-                <div class="card-body">
-                    <a href="{% url 'booking:detail_book' book.pk %}">
-                        <h5 class="card-title"> 호텔명 </h5>
-                    </a>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">registed - 
-                        <a href="#">
-                            {{ book.username }}
-                        </a>
-                    </h6>
-                    <p class="card-text"> 호텔상품명 </p>
-                    <span> 상품 가격 </span>
+        {% for book in books %}
+            <div class="col-sm-4 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">호텔 이름 : {{ book.product.info.name }}</p>
+                        <hr>
+                        <p class="card-text">상품 명 : <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
+                            {{ book.product.title }}
+                        </a></p>
+                        <hr>
+                        <p class="card-text">예약자 명 : {{ book.name }} </p>
+                        <p class="card-text">연락처 : {{ book.phone }}</p>
+                        <p class="card-text">가격 : {{ book.product.price }} 원</p>
+                        <p class="card-text">이용날짜 : {{ book.product.checkin|date:'Y.m.d' }} ~ {{ book.product.checkout|date:'Y.m.d' }}</p>
+                        <hr>
+                        <div>    
+                            {% if book.state == 0 %}
+                            <p class="card-text">예약 상태 : 결제 대기</p>
+                            <div class='d-flex justify-content-around'>
+                                <a href="{% url 'booking:update_book' book.pk book.product.pk %}">
+                                    <button class="btn btn-outline-info">결제 하러 가기</button>
+                                </a>
+                                <a href="{% url 'booking:delete_book' book.pk book.product.pk %}">
+                                    <button class="btn btn-outline-danger">예약 취소</button>
+                                </a>
+                            </div>
+                            {% elif book.state == 1 %}
+                            <div class='d-flex justify-content-around'>
+                                <p class="card-text">예약 상태 : 예약 완료</p>
+                                <a href="{% url 'booking:delete_book' book.pk book.product.pk %}">
+                                    <button class="btn btn-outline-danger">예약 취소</button>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </section>
-
-
 
 {% endblock content %}

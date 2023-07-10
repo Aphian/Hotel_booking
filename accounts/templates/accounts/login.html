@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
+{% load static %}
 {% load bootstrap5 %}
 
 {% block content %}
 
 <section class="container">
-    <h1>Login</h1>
+    <div class='d-flex justify-content-center'>
+        <h1>Login</h1>
+    </div>
     <hr>
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form login_form %}
-        <br>
-        <div>
-            <button class="btn btn-outline-primary">login</button>
+    <div class='d-flex justify-content-center'>
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form login_form %}
+            <br>
+            <div class="d-grid gap-2">
+                <button class="btn btn-outline-primary">로그인</button>
+            </div>
+            <br>
+        </form>
+    </div>
+    <div class='d-flex justify-content-center'>
+        <a href="{% url 'hotel_accounts:signup' %}">
+            <button class="btn btn-outline-info">회원가입</button>
+        </a>
+    </div>
+    <hr>
+    <div class='d-flex justify-content-center' style="padding: auto;">
+        <div width:'13rem'>
+            <a href="{% provider_login_url "naver" %}">
+                <img src="/static/image/naver_button.png" alt="naver" style="width: 13rem">
+            </a>
         </div>
-        <br>
-    </form>
-    <div>
-        <a href="{% url 'hotel_accounts:signup' %}"><button class="btn btn-outline-info">SignUp</button></a>
     </div>
-    <hr>
-    <div>
-        <a href="{% provider_login_url "naver" %}">Naver</a>
+    <div class='d-flex justify-content-center' style="padding: 10px;">
+        <div>
+            <a href="{% provider_login_url "google" %}">
+                <img src="/static/image/google_button.png" alt="google" style="width: 13rem">
+            </a>
+        </div>        
     </div>
-    <div>
-        <a href="{% provider_login_url "google" %}">Google</a>
-    </div>
-    {% comment %} <div>
-        <a href="{% provider_login_url "kakao" method='oauth2' %}">Kakao</a>
-    </div> {% endcomment %}
 </section>
-
+    
 {% endblock content %}
