@@ -27,11 +27,11 @@
                                 <p class="card-text">{{ hotel_products.title }} : {{ hotel_products.price }}</p>
                             {% endfor %}
                         {% endif %}
-                        </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
+        </div>
     {% elif group.name == 'client'%}
     <h2>예약 목록</h2>
     <hr>
@@ -55,8 +55,7 @@
                     <p class="card-text">연락처 : {{ book.phone }}</p>
                     <p class="card-text">가격 : {{ book.product.price }} 원</p>
                     <p class="card-text">이용날짜 : {{ book.product.checkin|date:'Y.m.d' }} ~ {{ book.product.checkout|date:'Y.m.d' }}</p>
-                    <hr>
-                    <div>    
+                    <hr>   
                     {% if book.state == 0 %}
                         <p class="card-text">예약 상태 : 결제 대기</p>
                         <div class='d-flex justify-content-end'>
@@ -77,6 +76,7 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
         {% endfor %}
         {% endif %}
     {% endif %}
