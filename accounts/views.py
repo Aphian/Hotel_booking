@@ -93,5 +93,5 @@ def social_group(request):
         user.groups.add(group)
         return redirect('home')
     
-    auth_login(request, user)
+    auth_login(request, user, backend='allauth.account.auth_backends.AuthenticationBackend')
     return redirect('home')
