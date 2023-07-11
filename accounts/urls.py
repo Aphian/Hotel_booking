@@ -13,6 +13,8 @@ urlpatterns = [
     path('hotel_group_permission/', views.social_group, name='social_group'),
 
     path('<str:username>/', views.profile, name='profile'),
+    path('<str:username>/update/', views.update_accounts, name='update_accounts'),
+    path('<str:username>/delete/', views.delete_accounts, name='delete_accounts'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

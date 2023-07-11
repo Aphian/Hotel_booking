@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, get_
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 # Create your views here.
-from . forms import CustomUserCreationForm
+from . forms import CustomUserCreationForm, CustomUserChangeForm
 # from hotel_booking.models import HotelInfo, HotelProduct
 # from booking.models import Book
 
@@ -46,6 +46,30 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
+    return redirect('home')
+
+@login_required
+@require_http_methods(['GET', 'POST'])
+def update_accounts(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    if request.method == 'GET' :
+        update_form = CustomUserChangeForm(instance=profile_user)
+    else:
+        update_form = CustomUserChangeForm(request.POST, instance=profile_user)
+        if update_form.is_valid():
+            profile_user = update_form.save()
+            return redirect('hotel_accounts:profile', profile_user.username)
+        
+    return render(request, 'accounts/update_form.html', {
+        'form' : update_form,
+        'profile_user' : profile_user,
+    })
+
+@require_POST
+def delete_accounts(request, username):
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request) 
     return redirect('home')
 
 @login_required

@@ -24,19 +24,19 @@
                         <div>    
                             {% if book.state == 0 %}
                             <p class="card-text">예약 상태 : 결제 대기</p>
-                            <div class='d-flex justify-content-around'>
+                            <div class='d-flex justify-content-end'>
                                 <a href="{% url 'booking:update_book' book.pk book.product.pk %}">
                                     <button class="btn btn-outline-info">결제 하러 가기</button>
                                 </a>
                                 <a href="{% url 'booking:delete_book' book.pk book.product.pk %}">
-                                    <button class="btn btn-outline-danger">예약 취소</button>
+                                    <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>
                                 </a>
                             </div>
                             {% elif book.state == 1 %}
-                            <div class='d-flex justify-content-around'>
+                            <div class='d-flex justify-content-end'>
                                 <p class="card-text">예약 상태 : 예약 완료</p>
                                 <a href="{% url 'booking:delete_book' book.pk book.product.pk %}">
-                                    <button class="btn btn-outline-danger">예약 취소</button>
+                                    <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>
                                 </a>
                             </div>
                             {% endif %}
