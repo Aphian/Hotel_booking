@@ -47,24 +47,24 @@
         </div>
         {% if user.is_authenticated %}
             {% if user == hotel_info.user %}
-                <div class="row g-3 align-items-center">
+                <div class="row align-items-center mb-3">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                         <form action="{% url 'hotel:delete_product' hotel_info.pk product.pk %}" method='POST'>
                             {% csrf_token %}
                             <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
                         </form>
                     </div>
-                    <hr>
                 </div>
+                <hr>
             {% else %}
-                <div class="row g-3 align-items-center">
+                <div class="row align-items-center mb-3">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                         <a href="{% url 'booking:create_book' product.pk %}">
                             <button class="btn btn-outline-info">Book</button>
                         </a>
                     </div>
-                    <hr>
                 </div>
+                <hr>
             {% endif %}
         {% else %}
         <div class="row g-3 align-items-center">
