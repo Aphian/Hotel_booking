@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from imagekit.models import ProcessedImageField, ImageSpecField
+from imagekit.processors import ResizeToFit
 
 # Create your models here.
 
@@ -11,11 +13,18 @@ class HotelInfo(models.Model):
                              )
     
     name = models.CharField(max_length=100)
-    # hotel_image = models.ImageField(blank= True, upload_to = 'images/')
-    image = models.CharField(max_length=100)
     info = models.CharField(max_length=200, default='Hotel_Info')
     score = models.FloatField(default=0, null=True)
     price = models.PositiveIntegerField(default=0, null=True)
+    image = ProcessedImageField(upload_to='images/',
+                                processors=[ResizeToFit(width=960, upscale=False)],
+                                format='JPEG'
+                                )
+    image_thumbnail = ImageSpecField(source='image',
+                                    processors=[ResizeToFit(width=320, upscale=False)],
+                                    format='JPEG',
+                                    options={'quality': 60}
+                                )
 
 
 class HotelReviews(models.Model):

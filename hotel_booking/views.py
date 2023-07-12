@@ -25,7 +25,7 @@ def create_hotel_info(request):
     if request.method == 'GET':
         create_form = HotelInfoForm()
     else:
-        create_form = HotelInfoForm(request.POST)
+        create_form = HotelInfoForm(request.POST, request.FILES)
         if create_form.is_valid():
             hotel_info = create_form.save(commit=False)
             hotel_info.user = request.user
@@ -77,7 +77,7 @@ def update_hotel_info(request, hotel_info_pk):
     if request.method == 'GET':
         update_form = HotelInfoForm(instance=hotel_info)
     else:
-        update_form = HotelInfoForm(request.POST, instance=hotel_info)
+        update_form = HotelInfoForm(request.POST, request.FILES, instance=hotel_info)
         if update_form.is_valid():
             hotel_info = update_form.save()
             return redirect('hotel:detail_hotel_info', hotel_info_pk)

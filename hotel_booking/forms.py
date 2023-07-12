@@ -7,11 +7,6 @@ class HotelInfoForm(forms.ModelForm):
         max_length=30,
     )
 
-    image = forms.CharField(
-        max_length=100,
-        min_length=0,
-    )
-
     info = forms.CharField(
         max_length=200,
         min_length=2,
