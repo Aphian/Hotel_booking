@@ -9,7 +9,7 @@
     {% for hotel_info in hotel_infoes  %}
     <div class="col">
         <div class="card h-100">
-            <img src="{{ hotel_info.image.url }}" class="card-img-top" alt="{{ hotel_info.image }}">
+            <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
             <div class="card-body">
                 <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
                     <h5 class="card-title"> {{ hotel_info.name }} ({{hotel_info.reviews.count}})</h5>

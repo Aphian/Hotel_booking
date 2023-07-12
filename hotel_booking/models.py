@@ -48,6 +48,16 @@ class HotelProduct(models.Model):
     checkout = models.DateField()
     is_booked = models.IntegerField(default=0)
 
+    # image = ProcessedImageField(upload_to='images/products/',
+    #                             processors=[ResizeToFill(width=600, height=600)],
+    #                             format='JPEG'
+    #                             )
+    # image_thumbnail = ImageSpecField(source='image',
+    #                                 processors=[ResizeToFill(width=320, height=320, upscale=False)],
+    #                                 format='JPEG',
+    #                                 options={'quality': 60}
+    #                             )
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
                              related_name='reservation',
