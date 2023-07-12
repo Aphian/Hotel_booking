@@ -2,24 +2,22 @@
 {% load bootstrap5 %}
 {% block content %}
     
-<section class="container">
+<h1> {{ hotel_info.name }} </h1> 
+<h2> {{ hotel_info.score }} </h2>
+<hr>
 
-    <h1> {{ hotel_info.name }} </h1> 
-    <h2> {{ hotel_info.score }} </h2>
-    <hr>
-    
-    <h3> Registered Person - {{ hotel_info.user.username }}</h2>
-    <hr>
-    
-    <p>{{ hotel_info.info | linebreaks }}</p>
-    <hr>
+<h3> Registered Person - {{ hotel_info.user.username }}</h2>
+<hr>
 
-    {% include 'hotel_booking/hotel_product_ui.html' %}
+<p>{{ hotel_info.info | linebreaks }}</p>
+<hr>
 
-    {% include 'hotel_booking/hotel_detail_ui.html' %}
+{% include 'hotel_booking/product_add_ui.html' %}
 
-    {% include 'hotel_booking/hotel_detail_reviews_ui.html' %}
-    
-</section>
+{% include 'hotel_booking/product_ui.html' %}
+
+{% include 'hotel_booking/hotel_detail_ui.html' %}
+
+{% include 'hotel_booking/hotel_detail_reviews_ui.html' %}
 
 {% endblock content %}

@@ -37,6 +37,7 @@ class HotelProduct(models.Model):
     price = models.IntegerField(default=0)
     checkin = models.DateField()
     checkout = models.DateField()
+    is_booked = models.IntegerField(default=0)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,

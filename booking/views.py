@@ -25,6 +25,7 @@ def index_book(request, username):
 @login_required
 @require_http_methods(['GET', 'POST'])
 def create_book(request, product_pk):
+    product = get_object_or_404(HotelProduct, pk=product_pk)
     if not request.user.groups.filter(name="client").exists():
         return redirect('home')
 
@@ -37,6 +38,8 @@ def create_book(request, product_pk):
             book.user = request.user
             book.product_id = product_pk
             book.save()
+            product.is_booked = 1
+            product.save()
             return redirect('booking:detail_book', book.pk, product_pk)
         
     return render(request, 'booking/book_form.html', {
@@ -76,12 +79,14 @@ def update_book(request, book_pk, product_pk):
 def delete_book(request, book_pk, product_pk):
     book = get_object_or_404(Book, pk=book_pk)
     product = get_object_or_404(HotelProduct, pk=product_pk)
-    hotel = get_object_or_404(HotelInfo, pk=product.info_id)
+    # hotel = get_object_or_404(HotelInfo, pk=product.info_id)
 
     if request.user != book.user:
         return redirect('booking:detail_book', book.pk, product_pk)
     
     book.delete()
+    product.is_booked = 0
+    product.save()
 
     return redirect('hotel_accounts:profile', request.user)
 

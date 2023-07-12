@@ -1,0 +1,25 @@
+<h2>등록 목록</h2>
+    <hr>
+        {% include 'sidebar.html' %}
+        <div class="row">
+            {% for hotel_infoes in profile_user.hotel_infoes.all %}
+            <div class="col-sm-4 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'hotel:detail_hotel_info' hotel_infoes.pk %}">
+                            {{ hotel_infoes.name }} 
+                        </a>
+                        <span>평점 : {{ hotel_infoes.score }}</span>
+                        <hr>
+                        {% if hotel_infoes.price == 0 %}
+                            <span>등록 물품이 없습니다.</span>
+                        {% else %}
+                            {% for hotel_products in hotel_infoes.products.all %}
+                                <p class="card-text">{{ hotel_products.title }} : {{ hotel_products.price }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>

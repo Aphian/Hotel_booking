@@ -2,16 +2,13 @@
 {% load bootstrap5 %}
 
 {% block content %}
-<section class="container">
-    <h1>SignUp</h1>
-    <hr>
-    <form method="POST">
-        {% csrf_token %}
-        {% comment %} {{signup_form.as_p}} {% endcomment %}
-        {% bootstrap_form signup_form %}
-        <div>
-            <button class="btn btn-outline-info">SignUp</button>
-        </div>
-    </form> 
-</section>
+<h1>SignUp</h1>
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form signup_form %}
+    <div>
+        <button class="btn btn-outline-info">SignUp</button>
+    </div>
+</form> 
 {% endblock content %}

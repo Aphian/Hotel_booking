@@ -1,0 +1,10 @@
+{% if product.is_booked == 0 %}
+<div class="row align-items-center mb-3">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a href="{% url 'booking:create_book' product.pk %}">
+            <button class="btn btn-outline-info">Book</button>
+        </a>
+    </div>
+</div>
+{% endif %}
+<hr>

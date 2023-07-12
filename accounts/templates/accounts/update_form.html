@@ -2,22 +2,20 @@
 {% load bootstrap5 %}
 
 {% block content %}
-<section class="container" margin:0 auto;>
-    <h1>{{ profile_user.username }} 의 프로필</h1>
-    <hr>
-    <h2>Update Profile</h2>
-    <hr>
-    {% for group in user.groups.all %}
-    {% include 'sidebar.html' %}
-    {% endfor %}
-    <div class="row">
-        <form method="POST">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div>
-                <button class="btn btn-outline-info">Submit</button>
-            </div>
-        </form> 
-    </div>
-</section>
+<h1>{{ profile_user.username }} 의 프로필</h1>
+<hr>
+<h2>Update Profile</h2>
+<hr>
+{% for group in user.groups.all %}
+{% include 'sidebar.html' %}
+{% endfor %}
+<div class="row">
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div>
+            <button class="btn btn-outline-info">Submit</button>
+        </div>
+    </form> 
+</div>
 {% endblock content %}

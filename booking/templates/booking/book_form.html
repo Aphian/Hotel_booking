@@ -3,17 +3,15 @@
 
 {% block content %}
 
-<section class="container">
-    <h1>Book</h1>
-    <hr>
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form book_form %}
+<h1>Book</h1>
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form book_form %}
 
-        <div>
-            <button class="btn btn-outline-success">Book</button>
-        </div>
-    </form>
-</section>
+    <div>
+        <button class="btn btn-outline-success">Book</button>
+    </div>
+</form>
 
 {% endblock content %}
