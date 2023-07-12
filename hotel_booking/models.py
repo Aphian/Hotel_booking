@@ -17,7 +17,7 @@ class HotelInfo(models.Model):
     score = models.FloatField(default=0, null=True)
     price = models.PositiveIntegerField(default=0, null=True)
     image = ProcessedImageField(upload_to='images/',
-                                processors=[ResizeToFill(width=600, height=600, upscale=False)],
+                                processors=[ResizeToFill(width=600, height=600)],
                                 format='JPEG'
                                 )
     image_thumbnail = ImageSpecField(source='image',
