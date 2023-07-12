@@ -139,7 +139,7 @@ def create_product(request, hotel_info_pk):
             product.save()
             return redirect('hotel:detail_hotel_info', hotel_info.pk)
     
-    return render(request, 'hotel_booking/hotel_product_form.html', {
+    return render(request, 'hotel_booking/product_form.html', {
         'products_form' : product_form,
     })
 
