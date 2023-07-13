@@ -1,18 +1,19 @@
-<div class="row">
-    {% for product in products %}
-    {% if user.is_authenticated %}
-        {% if product.is_booked == 0 %}
-        <div class="col-sm-4 mb-2">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"> {{ product.title }} </h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">registed - 
-                        <a href="#">
-                            {{ product.user.username }}
-                        </a>
-                    </h6>
+{% for product in products %}
+<div class="row" style="width: 80%; margin: 0 auto;">
+{% if user.is_authenticated %}
+    {% if product.is_booked == 0 %}
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <p>img</p>
+            </div>
+            <div class="col-md-8">
+                <div class="card-header"> {{ product.title }} </div>
+                    <div class="card-body">
                     <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
                     <p class="card-text">{{ product.price }} 원</p>
+                    <p class="card-text"><small class="text-body-secondary">Registered Person - {{ product.user.username }}</small></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,5 +26,6 @@
     {% else %}
         {% include 'hotel_booking/product_none_book_ui.html' %}
     {% endif %}
+    </div>
 {% endfor %}
 </div>

@@ -5,28 +5,26 @@
 <h1>Hotel List</h1>
 <hr>
 
-<div class="row row-cols-1 row-cols-md-4 g-4">
-    {% for hotel_info in hotel_infoes  %}
-    <div class="col">
-        <div class="card h-100">
-            <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
-            <div class="card-body">
-                <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
-                    <h5 class="card-title"> {{ hotel_info.name }} ({{hotel_info.reviews.count}})</h5>
-                    {{ hotel_info.score }}
-                </a>
-                <hr>
-                <p class="card-text">{{ hotel_info.info }}</p>
-                <hr>
-                {% if hotel_info.price != 0 %}
-                    <span>{{ hotel_info.price }}</span>
-                {% else %}
-                    <span>상품이 없습니다.</span>
-                {% endif %}
-            </div>
+<div style="margin: 0 5%;">
+{% for hotel_info in hotel_infoes  %}
+    <div class="card mb-3" style="width: 80%; float:right;">
+        <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
+        <div class="card-body">
+            <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
+                <h5 class="card-title"> {{ hotel_info.name }} </h5>
+            </a>
+            <p class="card-text">{{ hotel_info.score }} ({{hotel_info.reviews.count}})</p>
+            <hr>
+            <p class="card-text">{{ hotel_info.info }}</p>
+            <hr>
+            {% if hotel_info.price != 0 %}
+                <span>{{ hotel_info.price }}</span>
+            {% else %}
+                <span>상품이 없습니다.</span>
+            {% endif %}
         </div>
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 
 {% endblock content %}

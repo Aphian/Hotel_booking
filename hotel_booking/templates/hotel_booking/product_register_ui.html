@@ -1,6 +1,6 @@
 {% if product.is_booked == 0 %}
 <div class="row align-items-center mb-3">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <form action="{% url 'hotel:delete_product' hotel_info.pk product.pk %}" method='POST'>
             {% csrf_token %}
             <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>

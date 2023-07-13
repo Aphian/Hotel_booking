@@ -1,6 +1,6 @@
 {% if user == hotel_info.user %}
 <div class="row g-3 align-items-center">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a href="{% url 'hotel:create_product' hotel_info.pk %}">
             <button class="btn btn-outline-success">Product Add</button>
         </a>

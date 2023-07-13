@@ -1,4 +1,3 @@
-<header class="container">
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container-fluid">
             <div class="container d-flex justify-content-between p-2 fw-bold" id="navbarNav">
@@ -16,11 +15,13 @@
                                 <li class="nav-item">
                                     <a href="{% url 'board:index_board' %}" class="nav-link active">공지사항</a>
                                 </li>
-                                <li>
-                                    <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link active">{{ user }}'s profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'hotel_accounts:logout' %}" class="nav-link active">로그아웃</a>
+                                <li class="nav-item dropdown">
+                                    <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}'s profile</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url 'hotel_accounts:update_accounts' user %}">내 정보수정</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'hotel_accounts:logout' %}">LogOut</a></li>
+                                    </ul>
                                 </li>
                             {% elif group.name == 'register'%}
                                 <li class="nav-item">
@@ -29,31 +30,37 @@
                                 <li class="nav-item">
                                     <a href="{% url 'hotel:create_hotel_info' %}" class="nav-link active">호텔 등록</a>
                                 </li>
-                                <li>
-                                    <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link active">{{ user }}'s profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'hotel_accounts:logout' %}" class="nav-link active">로그아웃</a>
+                                <li class="nav-item dropdown">
+                                    <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}'s profile</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url 'hotel_accounts:update_accounts' user %}">내 정보수정</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'hotel_accounts:logout' %}">LogOut</a></li>
+                                    </ul>
                                 </li>
                             {% elif group.name == 'adminpage'%}
                                 <li class="nav-item">
                                     <a href="{% url 'board:index_board' %}" class="nav-link active">공지사항</a>
                                 </li>
-                                <li>
-                                    <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link active">{{ user }}'s profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'hotel_accounts:logout' %}" class="nav-link active">로그아웃</a>
+                                <li class="nav-item dropdown">
+                                    <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}'s profile</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url 'hotel_accounts:update_accounts' user %}">내 정보수정</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'hotel_accounts:logout' %}">LogOut</a></li>
+                                    </ul>
                                 </li>
                             {% endif %}
                         {% endfor %}
                         {% if user.is_superuser == True %}
-                            <li>
-                                <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link active">{{ user }}'s profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'hotel_accounts:logout' %}" class="nav-link active">로그아웃</a>
-                            </li>
+                        <li class="nav-item dropdown">
+                            <a href="{% url 'hotel_accounts:profile' user %}" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}'s profile</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'hotel_accounts:update_accounts' user %}">내 정보수정</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'hotel_accounts:logout' %}">LogOut</a></li>
+                            </ul>
+                        </li>
                         {% endif %}
                     {% else %}
                     <li class="nav-item">
@@ -63,11 +70,10 @@
                         <a href="{% url 'hotel_accounts:signup' %}" class="nav-link active">회원가입</a>
                     </li> 
                     <li class="nav-item">
-                        <a href="{% url 'hotel_accounts:login' %}" class="nav-link active">로그인</a>
+                        <a href="{% url 'hotel_accounts:login' %}" class="nav-link active">LogIn</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
-</header>

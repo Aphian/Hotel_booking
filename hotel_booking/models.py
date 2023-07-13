@@ -21,7 +21,7 @@ class HotelInfo(models.Model):
                                 format='JPEG'
                                 )
     image_thumbnail = ImageSpecField(source='image',
-                                    processors=[ResizeToFill(width=320, height=320, upscale=False)],
+                                    processors=[ResizeToFill(width=600, height=180, upscale=False)],
                                     format='JPEG',
                                     options={'quality': 60}
                                 )
