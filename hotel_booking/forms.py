@@ -63,4 +63,4 @@ class HotelProductForm(forms.ModelForm):
 
     class Meta:
         model = HotelProduct
-        fields = ('title', 'price', 'checkin', 'checkout', )
+        fields = ('title', 'price', 'checkin', 'checkout', 'image', )

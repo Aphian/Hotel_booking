@@ -53,7 +53,7 @@ def detail_hotel_info(request, hotel_info_pk):
     if min_price['min_price'] != None:
         price = min_price['min_price']
 
-    hotel_info.score = score
+    hotel_info.score = round(score, 1)
     hotel_info.price = price
     hotel_info.save()
 
@@ -131,7 +131,7 @@ def create_product(request, hotel_info_pk):
         product_form = HotelProductForm()
 
     else:
-        product_form = HotelProductForm(request.POST)
+        product_form = HotelProductForm(request.POST, request.FILES)
         if product_form.is_valid():
             product = product_form.save(commit=False)
             product.info = hotel_info
