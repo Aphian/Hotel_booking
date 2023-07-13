@@ -5,7 +5,7 @@
 
     <h1>Hotel Product</h1>
     <hr>
-    <form method='POST'>
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form products_form %}
         
