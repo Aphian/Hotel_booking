@@ -76,11 +76,13 @@ def delete_accounts(request, username):
 @require_http_methods(['GET', 'POST'])
 def profile(request, username):
     profile_user = get_object_or_404(User, username=username)
+    hotels = profile_user.hotel_infoes.all()
     books = profile_user.books.all()
 
     return render(request, 'accounts/profile.html', {
         'profile_user' : profile_user,
         'books': books,
+        'hotels' : hotels,
     })
 
 @login_required

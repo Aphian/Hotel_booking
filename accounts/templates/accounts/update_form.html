@@ -4,18 +4,22 @@
 {% block content %}
 <h1>{{ profile_user.username }} 의 프로필</h1>
 <hr>
-<h2>내 정보 수정</h2>
-<hr>
-{% for group in user.groups.all %}
-{% include 'sidebar.html' %}
-{% endfor %}
-<div class="row">
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <div>
-            <button class="btn btn-outline-info">Submit</button>
+<div style="margin: 0 3rem;">
+    <h2>내 정보 수정</h2>
+    <hr>
+    <div class="d-flex">
+        {% for group in user.groups.all %}
+            {% include 'sidebar.html' %}
+        {% endfor %}
+        <div class="row" style="margin-left: 2.5rem;">
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div>
+                    <button class="btn btn-outline-info">Submit</button>
+                </div>
+            </form> 
         </div>
-    </form> 
+    </div>
 </div>
 {% endblock content %}

@@ -3,21 +3,22 @@
 
 <h1>{{ profile_user.username }} 의 프로필</h1>
 <hr>
-{% for group in user.groups.all %}
-    {% if group.name == 'register' %}
-        {% include 'accounts/profile_register_ui.html' %}
-    {% elif group.name == 'client'%}
-        {% include 'accounts/profile_client_ui.html' %}
-    {% endif %}
-{% endfor %}
-<hr>
-<div>
+    {% for group in user.groups.all %}
+        {% if group.name == 'register' %}        
+            {% include 'accounts/profile_register_ui.html' %}
+        {% elif group.name == 'client'%}
+            {% include 'accounts/profile_client_ui.html' %}
+        {% endif %}
+    {% endfor %}
+    <hr>
+<div class="d-flex justify-content-end">
     <form action="{% url 'hotel_accounts:delete_accounts' user %}" method="POST">
         {% csrf_token %}
-        <div class='d-flex justify-content-end'>
+        <div>
             <button class="btn btn-outline-danger" onclick="return confirm('탈퇴하시겠습니까?')">회원탈퇴</button>
         </div>
     </form>
 </div>
+<hr>
 
 {% endblock content %}
