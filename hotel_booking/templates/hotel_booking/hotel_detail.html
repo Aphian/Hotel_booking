@@ -10,14 +10,16 @@
             <img src="{{ hotel_info.image.url }}" class="img-fluid rounded-start" alt="{{hotel_info.image}}">
         </div>
         <div class="col-md-8">
-            <div class="card-header">{{ hotel_info.name }} - {{ hotel_info.score }}</div>
+            <h2><div class="card-header">{{ hotel_info.name }} - {{ hotel_info.score }}</div></h2>
             <div class="card-body">
-                <p class="card-text">{{ hotel_info.info | linebreaks }}</p>
+                <p class="card-text">{{ hotel_info.info }}</p>
                 <hr>
                 {% if user == hotel_info.user %}
                     {% include 'hotel_booking/product_add_ui.html' %}
                 {% else %}
-                    <p class="card-text" style="float: right; margin-top: 13rem; margin-right: 1rem"><small class="text-body-secondary">Registered Person - {{ hotel_info.user.username }}</small></p>
+                <div class="d-flex justify-content-end" style="margin-top: 13em">
+                    <p class="card-text"><small class="text-body-secondary">Registered Person - {{ hotel_info.user.username }}</small></p>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -35,7 +37,7 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">{% include 'hotel_booking/hotel_detail_reviews_ui.html' %}</div>
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">{% include 'hotel_booking/product_ui.html' %}</div>
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">{% include 'hotel_booking/product.html' %}</div>
 </div>
 
 

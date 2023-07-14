@@ -8,8 +8,8 @@
                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.image }}">
             </div>
             <div class="col-md-8">
-                <div class="card-header"> {{ product.title }}</div>
-                <div class="card-body">
+                <h3><div class="card-header"> {{ product.title }}</div></h3>
+                <div class="card-body" style="padding-bottom: 0">
                     <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
                     <p class="card-text">{{ product.price }} 원</p>
                     <hr>

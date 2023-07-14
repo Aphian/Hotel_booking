@@ -16,12 +16,12 @@
 
 </style>
 <ul class="side_bar">
-    <li><a href="{% url 'home' %}">메뉴</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
     <hr>
-    <li><a href="{% url 'hotel_accounts:update_accounts' user %}">회원정보수정</a></li>
+    <li><a href="{% url 'hotel_accounts:update_accounts' user %}">내 정보 관리</a></li>
     {% if group.name == 'register' %}
-        <li><a href="{% url 'hotel_accounts:profile' user %}">등록목록</a></li>
+        <li><a href="{% url 'hotel_accounts:profile' user %}">등록 목록</a></li>
     {% elif group.name == 'client'%}
-        <li><a href="{% url 'hotel_accounts:profile' user %}">예약목록</a></li>
+        <li><a href="{% url 'hotel_accounts:profile' user %}">예약 목록</a></li>
     {% endif %}
 </ul>
