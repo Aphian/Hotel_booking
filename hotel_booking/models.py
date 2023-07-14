@@ -49,11 +49,11 @@ class HotelProduct(models.Model):
     is_booked = models.IntegerField(default=0)
 
     image = ProcessedImageField(upload_to='images/products/',
-                                processors=[ResizeToFill(width=600, height=600)],
+                                processors=[ResizeToFill(width=600, height=400)],
                                 format='JPEG',
                                 )
     image_thumbnail = ImageSpecField(source='image',
-                                    processors=[ResizeToFill(width=320, height=320, upscale=False)],
+                                    processors=[ResizeToFill(width=600, height=180, upscale=False)],
                                     format='JPEG',
                                     options={'quality': 60}
                                 )

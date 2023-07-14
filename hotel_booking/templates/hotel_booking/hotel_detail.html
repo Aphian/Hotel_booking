@@ -4,7 +4,7 @@
 
 <h1>Hotel Product</h1>
 <hr>
-<div class="card mb-3" style="width: 90%; margin: 0 auto;">
+<div class="card mb-3" style="width: 90%; margin: 3rem auto;">
     <div class="row g-0">
         <div class="col-md-4">
             <img src="{{ hotel_info.image.url }}" class="img-fluid rounded-start" alt="{{hotel_info.image}}">
@@ -14,15 +14,20 @@
             <div class="card-body">
                 <p class="card-text">{{ hotel_info.info | linebreaks }}</p>
                 <hr>
-                <p class="card-text"><small class="text-body-secondary">Registered Person - {{ hotel_info.user.username }}</small></p>
+                {% if user == hotel_info.user %}
+                    {% include 'hotel_booking/product_add_ui.html' %}
+                {% else %}
+                    <p class="card-text" style="float: right; margin-top: 13rem; margin-right: 1rem"><small class="text-body-secondary">Registered Person - {{ hotel_info.user.username }}</small></p>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
-{% include 'hotel_booking/product_add_ui.html' %}
-{% include 'hotel_booking/hotel_detail_ui.html' %}
+{% if user == hotel_info.user %}
+    {% include 'hotel_booking/hotel_detail_ui.html' %}
+{% endif %}
 
-<nav style="margin-bottom:3%;">
+<nav style="margin-bottom:3rem; margin-top:3rem;">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Product</button>
         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reveiws</button>      
