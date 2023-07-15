@@ -66,11 +66,10 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',    
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {'APP': {
                         'client_id': 'qSWfCW2NqcqIR4COpXWE',
-                        'secret': env("SECRET_KEY"),
+                        'secret': env('SECRET_KEY'),
                         'key': ''
                 }},
 

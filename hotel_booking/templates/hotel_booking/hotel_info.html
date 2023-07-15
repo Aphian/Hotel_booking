@@ -1,7 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
+        {% for hotel_carousel in hotel_carousels %}
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter }}" aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ hotel_first.image.url }}" class="d-block w-100" alt="{{ hotel_first.image }}">
+        </div>
+        {% for hotel_carousel in hotel_carousels %}
+        <div class="carousel-item">
+            <img src="{{ hotel_carousel.image.url }}" class="d-block w-100" alt="{{ hotel_carousel.image }}">
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<hr>
 <h1>Hotel List</h1>
 <hr>
 {% for hotel_info in hotel_infoes  %}
