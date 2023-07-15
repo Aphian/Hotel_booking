@@ -11,7 +11,7 @@ from django.db.models import Avg, Min, Q
 @require_safe
 def hotel_info(request):
     hotel_infoes = HotelInfo.objects.all()
-    hotel_carousels = HotelInfo.objects.exclude(id=1)
+    hotel_carousels = HotelInfo.objects.all()[1:]
     hotel_first = HotelInfo.objects.first()
 
     return render(request, 'hotel_booking/hotel_info.html', {

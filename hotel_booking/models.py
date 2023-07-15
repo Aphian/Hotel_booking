@@ -25,6 +25,11 @@ class HotelInfo(models.Model):
                                     format='JPEG',
                                     options={'quality': 60}
                                 )
+    image_thumbnail_home = ImageSpecField(source='image',
+                                processors=[ResizeToFill(width=800, height=200, upscale=False)],
+                                format='JPEG',
+                                options={'quality': 60}
+                            )
 
 
 class HotelReviews(models.Model):
