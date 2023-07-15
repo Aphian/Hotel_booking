@@ -5,7 +5,7 @@
     <div class="carousel-indicators">
         {% if hotel_infoes.count == 1 %}
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
-        {% elif hotel_infoes.count >= 2 %}
+        {% else %}
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
             {% for hotel_carousel in hotel_carousels %}
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter }}" aria-label="Slide {{ forloop.counter }}"></button>
@@ -15,15 +15,21 @@
     <div class="carousel-inner">
         {% if hotel_infoes.count == 1 %}
             <div class="carousel-item active">
-                <img src="{{ hotel_first.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_first.image_thumbnail_home }}">
+                <a href="{% url 'hotel:detail_hotel_info' hotel_first.pk %}">
+                    <img src="{{ hotel_first.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_first.image_thumbnail_home }}">
+                </a>
             </div>
         {% else %}
             <div class="carousel-item active">
-                <img src="{{ hotel_first.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_first.image_thumbnail_home }}">
+                <a href="{% url 'hotel:detail_hotel_info' hotel_first.pk %}">
+                    <img src="{{ hotel_first.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_first.image_thumbnail_home }}">
+                </a>
             </div>
             {% for hotel_carousel in hotel_carousels %}
             <div class="carousel-item">
-                <img src="{{ hotel_carousel.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_carousel.image_thumbnail_home }}">
+                <a href="{% url 'hotel:detail_hotel_info' hotel_carousel.pk %}">
+                    <img src="{{ hotel_carousel.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_carousel.image_thumbnail_home }}">
+                </a>
             </div>
             {% endfor %}
         {% endif %}
