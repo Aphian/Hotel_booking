@@ -67,10 +67,12 @@
     </form>
     <hr>
 </div>
+{% if hotel_searchs.count == 0 %}
+<div class="d-flex justify-content-center">
+    <h4>검색 결과가 없어요~</h4>
+</div>
+{% else %}
 {% for hotel_search in hotel_searchs %}
-    {% if hotel_search.count == 0 %}
-        <h4>결과 없음.</h4>
-    {% else %}
     <div class="card mb-3" style="width: 75%; float:right; margin-top: 1rem; margin-right: 3rem;">
         <img src="{{ hotel_search.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_search.image_thumbnail }}">
         <div class="card-body">
@@ -88,7 +90,7 @@
             {% endif %}
         </div>
     </div>
-    {% endif %}
 {% endfor %}
+{% endif %}
     
 {% endblock content %}

@@ -23,7 +23,7 @@ def hotel_info(request):
 @require_safe
 def hotel_search(request):
     keyword = request.GET.get('SEARCH')
-    hotel_searchs = HotelInfo.objects.filter(name=keyword)
+    hotel_searchs = HotelInfo.objects.filter(name__contains=keyword)
     hotel_carousels = HotelInfo.objects.all()[1:]
     hotel_first = HotelInfo.objects.first()
 
