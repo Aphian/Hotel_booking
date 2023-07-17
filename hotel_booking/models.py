@@ -62,6 +62,11 @@ class HotelProduct(models.Model):
                                     format='JPEG',
                                     options={'quality': 60}
                                 )
+    image_thumbnail_profile = ImageSpecField(source='image',
+                                    processors=[ResizeToFill(width=180, height=180, upscale=False)],
+                                    format='JPEG',
+                                    options={'quality': 60}
+                                )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,

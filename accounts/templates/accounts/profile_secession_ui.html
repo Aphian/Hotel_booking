@@ -1,7 +1,9 @@
-<form action="{% url 'hotel_accounts:delete_accounts' user %}" method="POST">
-    {% csrf_token %}
-    <div>
-        <button class="btn btn-outline-danger" onclick="return confirm('탈퇴하시겠습니까?')">회원탈퇴</button>
-    </div>
-</form>
+<div class="d-flex justify-content-end">
+    <form action="{% url 'hotel_accounts:delete_accounts' user %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <button class="btn btn-outline-danger" onclick="return confirm('탈퇴하시겠습니까?')">회원탈퇴</button>
+        </div>
+    </form>
+</div>
 <hr>

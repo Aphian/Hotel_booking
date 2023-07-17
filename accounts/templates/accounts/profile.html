@@ -3,12 +3,11 @@
 
 <h1>{{ profile_user.username }} 의 프로필</h1>
 <hr>
-    {% for group in user.groups.all %}
-        {% if group.name == 'register' %}        
-            {% include 'accounts/profile_register_ui.html' %}
-        {% elif group.name == 'client'%}
-            {% include 'accounts/profile_client_ui.html' %}
-        {% endif %}
-    {% endfor %}
-    <hr>
+{% for group in user.groups.all %}
+    {% if group.name == 'register' %}        
+        {% include 'accounts/profile_register_ui.html' %}
+    {% elif group.name == 'client'%}
+        {% include 'accounts/profile_client_ui.html' %}
+    {% endif %}
+{% endfor %}
 {% endblock content %}
