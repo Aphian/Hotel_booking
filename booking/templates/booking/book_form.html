@@ -1,17 +1,32 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load humanize %}
 
 {% block content %}
 
 <h1>Book</h1>
 <hr>
-<form method="POST">
-    {% csrf_token %}
-    {% bootstrap_form book_form %}
-
-    <div>
-        <button class="btn btn-outline-success">Book</button>
+<div style="width: 90%; margin: 0 auto;" class="row">
+    <div class="col-4">
+        <img src="{{ product.image.url }}" alt="{{ product.image }}" class="img-fluid" style="object-fit: cover;">
     </div>
-</form>
+    <div class="col-4">
+        <div style="display: inline-block; margin-right: 1rem;">
+            <h5>상품 명 : {{ product.title }}</h5>
+            <h6>가격 : {{ product.price| intcomma }} 원</h6>
+            <h6>이용 날짜 : {{ product.checkin|date:'Y.m.d' }} ~ {{ product.checkout|date:'Y.m.d' }}</h6>
+        </div>
+    </div>
+    <div class="col-4">
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form book_form %}
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-outline-success">Book</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
 
 {% endblock content %}

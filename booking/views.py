@@ -44,6 +44,7 @@ def create_book(request, product_pk):
         
     return render(request, 'booking/book_form.html', {
         'book_form' : book_form,
+        'product' : product,
     })
 
 @require_safe
@@ -79,7 +80,6 @@ def update_book(request, book_pk, product_pk):
 def delete_book(request, book_pk, product_pk):
     book = get_object_or_404(Book, pk=book_pk)
     product = get_object_or_404(HotelProduct, pk=product_pk)
-    # hotel = get_object_or_404(HotelInfo, pk=product.info_id)
 
     if request.user != book.user:
         return redirect('booking:detail_book', book.pk, product_pk)

@@ -31,6 +31,10 @@ class HotelInfo(models.Model):
                                 options={'quality': 60}
                             )
 
+def validate_score(score):
+    if score < 0 and score > 5.1:
+        raise ValidationError("0.0 ~ 5.0 사이의 숫자를 입력해주세요.")
+
 
 class HotelReviews(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -44,7 +48,7 @@ class HotelReviews(models.Model):
                             )
     
     content = models.CharField(max_length=200)
-    score = models.FloatField(default=0.0)
+    score = models.FloatField(default=0.0, validators=[validate_score])
 
 class HotelProduct(models.Model):
     title = models.CharField(max_length=50)

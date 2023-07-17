@@ -1,3 +1,4 @@
+{% load humanize %}
 {% for product in products %}
 {% if user.is_authenticated %}
 {% if product.is_booked == 0 %}
@@ -11,7 +12,7 @@
                 <h3><div class="card-header"> {{ product.title }}</div></h3>
                 <div class="card-body" style="padding-bottom: 0">
                     <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
-                    <p class="card-text">{{ product.price }} 원</p>
+                    <p class="card-text">{{ product.price| intcomma }} 원</p>
                     <hr>
                 {% endif %}
                     {% if user == hotel_info.user %}
@@ -28,4 +29,3 @@
     </div>
 </div>
 {% endfor %}
-</div>

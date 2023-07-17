@@ -48,9 +48,10 @@ def detail_hotel_info(request, hotel_info_pk):
     products = hotel_info.products.all()
     score = 0.0
     price = 0
-  
+
     avg_score = HotelReviews.objects.filter(info_id=hotel_info.pk).aggregate(avg_score=Avg("score"))
     min_price = HotelProduct.objects.filter(info_id=hotel_info.pk).aggregate(min_price=Min("price"))
+        
 
     if avg_score['avg_score'] != None:
         score = avg_score['avg_score']

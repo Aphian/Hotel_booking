@@ -4,7 +4,8 @@ from . models import Book
 class BookForm(forms.ModelForm):
     name = forms.CharField(
         max_length=20,
-        min_length=2
+        min_length=2,
+        label='예약자명',
     )
 
     phone = forms.CharField(
@@ -12,7 +13,8 @@ class BookForm(forms.ModelForm):
         max_length=20,
         widget= forms.TextInput(attrs={
             'placeholder' : '010-1234-5678'
-        })
+        }),
+        label="예약자 연락처",
         
     )
 

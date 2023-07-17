@@ -4,7 +4,9 @@
     <form action="{% url 'hotel:create_review' hotel_info.pk %}" method="POST" style="margin-bottom: 1rem">
         {% csrf_token %}
         {% bootstrap_form review_form %}
-        <button class="btn btn-outline-success">작성</button>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-success">작성</button>
+        </div>
     </form>
     {% endif %}
     <hr>

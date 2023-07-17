@@ -1,32 +1,41 @@
+{% load humanize %}
+{% include 'sidebar.html' %}
 <div style="margin: 0 3rem;">
     <h2>예약 목록</h2>
     <hr>
-    <div class="">
-    {% include 'sidebar.html' %}
-    {% if books.user_id == none %}
+    {% if books.count == 0 %}
+    <div class="d-flex justify-content-center align-items-center">
         <h3>예약 내역이 없어요~</h3>
-    {% endif %}
-        <div class="row">
-            {% for book in books %}         
-            <div class="col-sm-4 mb-5">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-text">호텔 이름 : {{ book.product.info.name }}</p>
-                        <hr>
-                        <p class="card-text">상품 명 : <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
-                            {{ book.product.title }}
+    </div>
+    <hr>
+    {% else %}
+    <ul class="list-group">
+        {% for book in books %}
+        <li class="list-group-item">
+            <div>
+                <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
+                    <h4>{{ book.product.info.name }} ({{ book.product.info.score }})</h4>
+                </a>
+                <p>{{ book.product.info.info }}</p>
+                <hr>
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{ book.product.image_thumbnail_profile.url }}" alt="{{ book.product.image_thumbnail_profile }}" class="img-fluid" style="object-fit: cover;">
+                    </div>
+                    <div class="col-10">
+                        <div style="display: inline-block; margin-right: 1rem;">
+                            <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
+                                <h5>상품 명 : {{ book.product.title }}</h5>
                             </a>
-                        </p>
-                        <hr>
-                        <p class="card-text">예약자 명 : {{ book.name }} </p>
-                        <p class="card-text">연락처 : {{ book.phone }}</p>
-                        <p class="card-text">가격 : {{ book.product.price }} 원</p>
-                        <p class="card-text">이용날짜 : {{ book.product.checkin|date:'Y.m.d' }} ~ {{ book.product.checkout|date:'Y.m.d' }}</p>
-                        <hr>   
+                            <h6>가격 : {{ book.product.price| intcomma }} 원</h6>
+                            <h6>이용 날짜 : {{ book.product.checkin|date:'Y.m.d' }} ~ {{ book.product.checkout|date:'Y.m.d' }}</h6>
+                        </div>
                         {% if book.state == 0 %}
-                        <p class="card-text">예약 상태 : 결제 대기</p>
                         <div class='d-flex justify-content-end'>
-                            <a href="{% url 'booking:update_book' book.pk book.product.pk %}">
+                            <p>예약 상태 : 결제 대기</p>
+                        </div>
+                        <div class='d-flex justify-content-end'>
+                            <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
                                 <button class="btn btn-outline-info">결제 하러 가기</button>
                             </a>
                             <a href="{% url 'booking:delete_book' book.pk book.product.pk %}" style="margin-left : 15px">
@@ -34,7 +43,7 @@
                             </a>
                         </div>
                         {% elif book.state == 1 %}
-                        <p class="card-text">예약 상태 : 예약 완료</p>
+                        <p>예약 상태 : 예약 완료</p>
                         <div class='d-flex justify-content-end'>
                             <a href="{% url 'booking:delete_book' book.pk book.product.pk %}">
                                 <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>
@@ -44,7 +53,9 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    </div>
+        </li>
+        <hr>
+        {% endfor %}
+    </ul>
+    {% endif %}
 </div>

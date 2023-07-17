@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block content %}
 <div id="carouselExampleIndicators" class="carousel slide" style="margin: 0 1rem;">
@@ -58,9 +59,9 @@
         <p class="card-text">{{ hotel_info.info }}</p>
         <hr>
         {% if hotel_info.price != 0 %}
-        <span>{{ hotel_info.price }}</span>
+            <span>{{ hotel_info.price| intcomma }} 원</span>
         {% else %}
-        <span>상품이 없습니다.</span>
+            <span>상품이 없습니다.</span>
         {% endif %}
     </div>
 </div>
