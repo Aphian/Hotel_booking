@@ -13,13 +13,27 @@ def hotel_info(request):
     hotel_infoes = HotelInfo.objects.all()
     hotel_carousels = HotelInfo.objects.all()[1:]
     hotel_first = HotelInfo.objects.first()
-
+    
     return render(request, 'hotel_booking/hotel_info.html', {
         'hotel_infoes' : hotel_infoes,
         'hotel_carousels' : hotel_carousels,
         'hotel_first' : hotel_first,
+    })
+
+@require_safe
+def hotel_search(request):
+    keyword = request.GET.get('SEARCH')
+    hotel_searchs = HotelInfo.objects.filter(name=keyword)
+    hotel_carousels = HotelInfo.objects.all()[1:]
+    hotel_first = HotelInfo.objects.first()
+
+    return render(request, 'hotel_booking/hotel_search.html', {
+        'hotel_searchs' : hotel_searchs,
+        'hotel_carousels' : hotel_carousels,
+        'hotel_first' : hotel_first,
 
     })
+
 
 @login_required
 @require_http_methods(['GET', 'POST'])
@@ -49,8 +63,8 @@ def detail_hotel_info(request, hotel_info_pk):
     score = 0.0
     price = 0
 
-    avg_score = HotelReviews.objects.filter(info_id=hotel_info.pk).aggregate(avg_score=Avg("score"))
     min_price = HotelProduct.objects.filter(info_id=hotel_info.pk).aggregate(min_price=Min("price"))
+    avg_score = HotelReviews.objects.filter(info_id=hotel_info.pk).aggregate(avg_score=Avg("score"))
         
 
     if avg_score['avg_score'] != None:

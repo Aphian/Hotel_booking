@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST, require_safe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.db.models import Min, Q
 
 # Create your views here.
 from . models import Book
 from . forms import BookForm
-
 from hotel_booking.models import HotelProduct, HotelInfo
+
 
 User = get_user_model()
 
@@ -26,6 +27,8 @@ def index_book(request, username):
 @require_http_methods(['GET', 'POST'])
 def create_book(request, product_pk):
     product = get_object_or_404(HotelProduct, pk=product_pk)
+    hotel_info = HotelProduct.objects.filter(info_id=product.info_id)
+
     if not request.user.groups.filter(name="client").exists():
         return redirect('home')
 

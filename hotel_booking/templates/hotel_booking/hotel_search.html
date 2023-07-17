@@ -13,7 +13,7 @@
 </style>
 <div id="carouselExampleIndicators" class="carousel slide" style="margin: 0 1rem;">
     <div class="carousel-indicators">
-        {% if hotel_infoes.count == 1 %}
+        {% if hotel_search.count == 1 %}
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
         {% else %}
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
@@ -23,7 +23,7 @@
         {% endif %}
     </div>
     <div class="carousel-inner">
-        {% if hotel_infoes.count == 1 %}
+        {% if hotel_search.count == 1 %}
             <div class="carousel-item active">
                 <a href="{% url 'hotel:detail_hotel_info' hotel_first.pk %}">
                     <img src="{{ hotel_first.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_first.image_thumbnail_home }}">
@@ -67,28 +67,28 @@
     </form>
     <hr>
 </div>
-{% for hotel_info in hotel_infoes  %}
-{% if hotel_info.count == 0 %}
-    <h3>등록된 호텔이 없어요.</h3>
-{% else %}
+{% for hotel_search in hotel_searchs %}
+    {% if hotel_search.count == 0 %}
+        <h4>결과 없음.</h4>
+    {% else %}
     <div class="card mb-3" style="width: 75%; float:right; margin-top: 1rem; margin-right: 3rem;">
-        <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
+        <img src="{{ hotel_search.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_search.image_thumbnail }}">
         <div class="card-body">
-            <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
-                <h5 class="card-title"> {{ hotel_info.name }} </h5>
+            <a href="{% url 'hotel:detail_hotel_info' hotel_search.pk %}">
+                <h5 class="card-title"> {{ hotel_search.name }} </h5>
             </a>
-            <p class="card-text">{{ hotel_info.score }} ({{hotel_info.reviews.count}})</p>
+            <p class="card-text">{{ hotel_search.score }} ({{hotel_search.reviews.count}})</p>
             <hr>
-            <p class="card-text">{{ hotel_info.info }}</p>
+            <p class="card-text">{{ hotel_search.info }}</p>
             <hr>
-            {% if hotel_info.price != 0 %}
-                <span>{{ hotel_info.price| intcomma }} 원</span>
+            {% if hotel_search.price != 0 %}
+                <span>{{ hotel_search.price| intcomma }} 원</span>
             {% else %}
                 <span>상품이 없습니다.</span>
             {% endif %}
         </div>
     </div>
-{% endif %}
+    {% endif %}
 {% endfor %}
     
 {% endblock content %}
