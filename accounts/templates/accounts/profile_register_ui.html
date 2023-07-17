@@ -1,5 +1,7 @@
 {% load humanize %}
-{% include 'sidebar.html' %}
+{% for group in user.groups.all %}
+    {% include 'sidebar.html' %}
+{% endfor %}
 <div style="margin: 0 3rem;">
     <h2>등록 목록</h2>
     <hr>

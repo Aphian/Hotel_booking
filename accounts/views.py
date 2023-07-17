@@ -4,11 +4,11 @@ from django.views.decorators.http import require_http_methods, require_safe, req
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import Group
 # Create your views here.
 from . forms import CustomUserCreationForm, CustomUserChangeForm
-# from hotel_booking.models import HotelInfo, HotelProduct
-# from booking.models import Book
+
 
 User = get_user_model()
 
@@ -97,3 +97,30 @@ def social_group(request):
     
     auth_login(request, user, backend='allauth.account.auth_backends.AuthenticationBackend')
     return redirect('home')
+
+def update_password(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    context= {}
+    error = ""
+    if request.method == "POST":
+        current_password = request.POST.get("origin_password")
+        user = request.user
+        if check_password(current_password,user.password):
+            new_password = request.POST.get("password1")
+            password_confirm = request.POST.get("password2")
+            if new_password == password_confirm:
+                user.set_password(new_password)
+                user.save()
+                auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect("home")
+            else:
+                context.update({'error':"새로운 비밀번호를 다시 확인해주세요."})
+                error = context['error']
+        else:
+            context.update({'error':"현재 비밀번호가 일치하지 않습니다."})
+            error = context['error']
+    
+    return render(request, "accounts/profile_change_pw.html",{
+        'error' : error,
+        'profile_user' : profile_user,
+    })

@@ -15,6 +15,7 @@ urlpatterns = [
     path('<str:username>/', views.profile, name='profile'),
     path('<str:username>/update/', views.update_accounts, name='update_accounts'),
     path('<str:username>/delete/', views.delete_accounts, name='delete_accounts'),
+    path('<str:username>/update_password/', views.update_password, name='update_password'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
