@@ -59,8 +59,8 @@
 <div class="side_bar">
     <a href="{% url 'home' %}">Home</a>
     <hr>
-    <form action="{% url 'hotel:hotel_search'%}">
-        <input type="search" name="SEARCH" placeholder="HOTLE_NAME">
+    <form action="{% url 'hotel:hotel_search'%}" class="d-flex">
+        <input class="form-control me-2" type="search" name="SEARCH" placeholder="HOTLE_NAME">
         <button type="submit" class="btn btn-light">
             <i class="bi bi-search"></i>
         </button>
@@ -71,7 +71,7 @@
     <h3>등록된 호텔이 없어요.</h3>
 {% else %}
 {% for hotel_info in hotel_infoes  %}
-    <div class="card mb-3" style="width: 75%; float:right; margin-top: 1rem; margin-right: 3rem;">
+    <div class="card mb-3" style="width: 75%; float:right; margin-top: 1rem;">
         <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
         <div class="card-body">
             <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
