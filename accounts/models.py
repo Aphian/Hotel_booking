@@ -12,6 +12,7 @@ def validate_phone(phone):
 
 class User(AbstractUser):
 
+    name = models.CharField(max_length=10, blank=True)
     # user_auth = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(2)])
     phone = models.CharField(max_length=20, validators=[validate_phone])
 

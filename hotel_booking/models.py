@@ -67,7 +67,7 @@ class HotelProduct(models.Model):
                                     options={'quality': 60}
                                 )
     image_thumbnail_profile = ImageSpecField(source='image',
-                                    processors=[ResizeToFill(width=180, height=180, upscale=False)],
+                                    processors=[ResizeToFill(width=180, height=120, upscale=False)],
                                     format='JPEG',
                                     options={'quality': 60}
                                 )

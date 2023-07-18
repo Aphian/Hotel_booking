@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% block content %}
-<h1>{{ profile_user.username }} 의 프로필</h1>
+<h1>{{ profile_user.name }} 의 프로필</h1>
 <hr>
 {% for group in user.groups.all %}
     {% include 'sidebar.html' %}
@@ -13,12 +13,16 @@
         <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input class="form-control" name="name" type="text" value="{{ profile_user.name }}">
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input class="form-control" name="email" type="email" placeholder="{{ profile_user.email }}">
+                <input class="form-control" name="email" type="email" value="{{ profile_user.email }}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Phone</label>                    
-                <input class="form-control" name="phone" type="text" placeholder="{{ profile_user.phone }}">
+                <input class="form-control" name="phone" type="text" placeholder="010-1234-5678" value="{{ profile_user.phone }}">
             </div>
             <div class="d-flex justify-content-end d-grid gap-2 d-md-flex">
                 <button class="btn btn-outline-dark" onclick="return confirm('회원 정보 수정 완료!')">Submit</button>
@@ -26,6 +30,5 @@
             </div>
         </form> 
     </div>
-    
 </div>
 {% endblock content %}

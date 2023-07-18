@@ -14,23 +14,30 @@
     <ul class="list-group">
         {% for hotel_infoes in profile_user.hotel_infoes.all %}
         <li class="list-group-item">
-            <div>
-                <a href="{% url 'hotel:detail_hotel_info' hotel_infoes.pk %}">
-                    <h4>{{ hotel_infoes.name }} ({{ hotel_infoes.score }})</h4>
-                </a>
-                <p>{{ hotel_infoes.info }}</p>
-                <hr>
-                {% if hotel_infoes.price == 0 %}
-                    <span>등록 상품이 없습니다.</span>
-                {% else %}
-                    {% for hotel_products in hotel_infoes.products.all %}
-                    <div style="display: inline-block; margin-right: 1rem;">
-                        <h5>{{ hotel_products.title }}</h5>
-                        <h6>{{ hotel_products.price| intcomma }} 원</h6>
-                        <img src="{{ hotel_products.image_thumbnail_profile.url }}" alt="hotel_products.image_thumbnail_profile">
-                    </div>
-                    {% endfor %}
-                {% endif %}
+            <div class="row">
+                <div class="col-3">
+                    <a href="{% url 'hotel:detail_hotel_info' hotel_infoes.pk %}">
+                        <img src="{{ hotel_infoes.image.url }}" class="card-img-top" alt="{{ hotel_infoes.image }}">
+                    </a>
+                </div>
+                <div class="col-9">
+                    <a href="{% url 'hotel:detail_hotel_info' hotel_infoes.pk %}">
+                        <h4>{{ hotel_infoes.name }} ({{ hotel_infoes.score }})</h4>
+                    </a>
+                    <p>{{ hotel_infoes.info }}</p>
+                    <hr>
+                    {% if hotel_infoes.price == 0 %}
+                        <span>등록 상품이 없습니다.</span>
+                    {% else %}
+                        {% for hotel_products in hotel_infoes.products.all %}
+                        <div style="display: inline-block; margin-right: 1rem;">
+                            <h5>{{ hotel_products.title }}</h5>
+                            <h6>{{ hotel_products.price| intcomma }} 원</h6>
+                            <img src="{{ hotel_products.image_thumbnail_profile.url }}" alt="hotel_products.image_thumbnail_profile">
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </li>
         <hr>

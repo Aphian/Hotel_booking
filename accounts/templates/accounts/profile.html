@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{ profile_user.username }} 의 프로필</h1>
+{% if profile_user.name %}
+<h1>{{ profile_user.name }} 의 프로필</h1>
+{% else %}
+<h1>{{ profile_user.user }} 의 프로필</h1>
+{% endif %}
 <hr>
 {% for group in user.groups.all %}
     {% if group.name == 'register' %}        

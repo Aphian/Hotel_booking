@@ -29,9 +29,6 @@ def create_book(request, product_pk):
     product = get_object_or_404(HotelProduct, pk=product_pk)
     hotel_info = get_object_or_404(HotelInfo, pk=product.info_id)
 
-
-
-
     if not request.user.groups.filter(name="client").exists():
         return redirect('home')
 

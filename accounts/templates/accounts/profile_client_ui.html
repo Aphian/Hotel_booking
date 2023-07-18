@@ -15,7 +15,7 @@
         {% for book in books %}
         <li class="list-group-item">
             <div>
-                <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
+                <a href="{% url 'hotel:detail_hotel_info' book.product.info.pk %}">
                     <h4>{{ book.product.info.name }} ({{ book.product.info.score }})</h4>
                 </a>
                 <p>{{ book.product.info.info }}</p>
