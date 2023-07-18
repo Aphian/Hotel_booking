@@ -62,8 +62,8 @@ def detail_hotel_info(request, hotel_info_pk):
     products = hotel_info.products.all()
     score = 0.0
     price = 0
-        
-    min_price = HotelProduct.objects.filter(info_id=hotel_info.pk).aggregate(min_price=Min("price"))
+    
+    min_price = HotelProduct.objects.filter(Q(info_id=hotel_info.pk) & Q(is_booked=0)).aggregate(min_price=Min("price"))
     avg_score = HotelReviews.objects.filter(info_id=hotel_info.pk).aggregate(avg_score=Avg("score"))
         
 
@@ -83,7 +83,7 @@ def detail_hotel_info(request, hotel_info_pk):
         'reviews' : reviews,
         'review_form' : review_form,
         'products' : products,
-        'score' : score,
+        'score' : score,        
     })
 
 @login_required
