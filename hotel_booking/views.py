@@ -72,7 +72,7 @@ def detail_hotel_info(request, hotel_info_pk):
 
     if min_price['min_price'] != None:
         price = min_price['min_price']
-
+    
     hotel_info.score = round(score, 1)
     hotel_info.price = price
     hotel_info.save()
