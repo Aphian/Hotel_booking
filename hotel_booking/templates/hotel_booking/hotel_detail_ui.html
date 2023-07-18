@@ -1,6 +1,6 @@
 <div class="d-grid gap-2 d-md-flex d-flex justify-content-end">
     <a href="{% url 'hotel:update_hotel_info' hotel_info.pk %}">
-        <button class="btn btn-outline-info">Edit</button>
+        <button class="btn btn-outline-dark">Edit</button>
     </a>
     <form action="{% url 'hotel:delete_hotel_info' hotel_info.pk %}" method='POST'>
         {% csrf_token %}

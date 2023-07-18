@@ -72,6 +72,7 @@ def delete_accounts(request, username):
         auth_logout(request) 
     return redirect('home')
 
+
 @login_required
 @require_http_methods(['GET', 'POST'])
 def profile(request, username):
@@ -98,6 +99,8 @@ def social_group(request):
     auth_login(request, user, backend='allauth.account.auth_backends.AuthenticationBackend')
     return redirect('home')
 
+@login_required
+@require_http_methods(['GET', 'POST'])
 def update_password(request, username):
     profile_user = get_object_or_404(User, username=username)
     context= {}

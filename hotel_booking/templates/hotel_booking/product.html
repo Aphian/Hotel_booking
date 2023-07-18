@@ -10,8 +10,8 @@
                 <div class="col-md-8">
                     <h3><div class="card-header"> {{ product.title }}</div></h3>
                     <div class="card-body" style="padding-bottom: 0">
-                        <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
-                        <p class="card-text">{{ product.price| intcomma }} 원</p>
+                        <p class="card-text">이용 날짜 : {{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
+                        <p class="card-text">가격 : {{ product.price| intcomma }} 원</p>
                         <hr>
                     {% if user.is_authenticated %}
                         {% if user == hotel_info.user %}
@@ -31,8 +31,8 @@
                 <div class="col-md-8">
                     <h3><div class="card-header"> {{ product.title }}</div></h3>
                     <div class="card-body" style="padding-bottom: 0">
-                        <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
-                        <p class="card-text">{{ product.price| intcomma }} 원</p>
+                        <p class="card-text">이용 날짜 : {{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
+                        <p class="card-text">가격 : {{ product.price| intcomma }} 원</p>
                         <hr>
                         <div class="d-flex justify-content-end">
                             <div style="display: inline-block;">

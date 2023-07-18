@@ -1,15 +1,11 @@
-{% if user == board.user %}
-<section class="container">
-    <div class="row g-3 align-items-center">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="{% url 'board:update_board' board.pk %}">
-                <button class="btn btn-outline-info">Edit</button>
-            </a>
-            <form action="{% url 'board:delete_board' board.pk %}" method='POST'>
-                {% csrf_token %}
-                <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
-            </form>
-        </div>
+<div class="row g-3 align-items-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="{% url 'board:update_board' board.pk %}">
+            <button class="btn btn-outline-dark">Edit</button>
+        </a>
+        <form action="{% url 'board:delete_board' board.pk %}" method='POST'>
+            {% csrf_token %}
+            <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
+        </form>
     </div>
-</section>
-{% endif %}
+</div>

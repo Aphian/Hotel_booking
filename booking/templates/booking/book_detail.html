@@ -31,7 +31,7 @@
                 </a>
                 {% elif book.state == 0 %}
                 <a href="{% url 'booking:update_book' book.pk book.product.pk %}">
-                    <button class="btn btn-outline-info">결제 하기</button>
+                    <button class="btn btn-outline-dark">결제 하기</button>
                 </a>
                 <a href="{% url 'booking:delete_book' book.pk product.pk %}">
                     <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>

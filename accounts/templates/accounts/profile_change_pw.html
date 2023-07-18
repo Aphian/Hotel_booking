@@ -9,7 +9,7 @@
 <div style="margin: 0 3rem;">
     <h2>비밀번호 변경</h2>
     <hr>
-    <div class="row" style="margin-left: 2.5rem; width: 50%">
+    <div class="row" style="margin-left: 10rem; width: 50%">
         <form method="POST" action="{% url 'hotel_accounts:update_password' user %}">
             {% csrf_token %}
             <div class="mb-3">
@@ -24,14 +24,14 @@
                 <label class="form-label">새 비밀번호 확인</label>                    
                 <input class="form-control" name="password2" type="password">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-danger">
                 {% if context|length_is:'0' %}
                 {% else %}
                 {{ error }}
                 {% endif %}
             </div>
-            <div>
-                <button class="btn btn-outline-info" onclick="return confirm('비밀번호를 변경 하시겠습니다?!')">Submit</button>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-outline-dark" onclick="return confirm('비밀번호를 변경 하시겠습니다?!')">Submit</button>
             </div>
         </form>
     </div>

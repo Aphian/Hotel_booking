@@ -38,7 +38,7 @@
                         </div>
                         <div class='d-flex justify-content-end'>
                             <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
-                                <button class="btn btn-outline-info">결제 하러 가기</button>
+                                <button class="btn btn-outline-dark">결제 하러 가기</button>
                             </a>
                             <a href="{% url 'booking:delete_book' book.pk book.product.pk %}" style="margin-left : 15px">
                                 <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>
