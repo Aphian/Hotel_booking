@@ -1,21 +1,20 @@
 {% load humanize %}
 {% for product in products %}
-{% if user.is_authenticated %}
-{% if product.is_booked == 0 %}
 <div class="row">
     <div class="card mb-5" style="width: 80%; margin: 0 auto; padding: 0;">
         <div class="row g-0" style="padding: 1rem;">
+            {% if product.is_booked == 0 %}
             <div class="col-md-4">
                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.image }}">
-            </div>
-            <div class="col-md-8">
-                <h3><div class="card-header"> {{ product.title }}</div></h3>
-                <div class="card-body" style="padding-bottom: 0">
-                    <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
-                    <p class="card-text">{{ product.price| intcomma }} 원</p>
-                    <hr>
-                {% endif %}
-                    {% if user == hotel_info.user %}
+                </div>
+                <div class="col-md-8">
+                    <h3><div class="card-header"> {{ product.title }}</div></h3>
+                    <div class="card-body" style="padding-bottom: 0">
+                        <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
+                        <p class="card-text">{{ product.price| intcomma }} 원</p>
+                        <hr>
+                    {% if user.is_authenticated %}
+                        {% if user == hotel_info.user %}
                             {% include 'hotel_booking/product_register_ui.html' %}
                         {% else %}
                             {% include 'hotel_booking/product_book_ui.html' %}
@@ -23,9 +22,28 @@
                     {% else %}
                         {% include 'hotel_booking/product_none_book_ui.html' %}
                     {% endif %}
+                    </div>
                 </div>
+            {% elif product.is_booked == 1 %}
+                <div class="col-md-4">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.image }}">
+                </div>
+                <div class="col-md-8">
+                    <h3><div class="card-header"> {{ product.title }}</div></h3>
+                    <div class="card-body" style="padding-bottom: 0">
+                        <p class="card-text">{{ product.checkin|date:'Y-m-d' }} ~ {{ product.checkout|date:'Y-m-d'}}</p>
+                        <p class="card-text">{{ product.price| intcomma }} 원</p>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div style="display: inline-block;">
+                                <p style="margin-bottom: 0.5rem;"><small class="text-body-secondary">Registered Person - {{ product.user.username }}</small></p>
+                                <button class="btn btn-outline-secondary" disabled style="width: 100%">예약 완료 상품</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             </div>
         </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
