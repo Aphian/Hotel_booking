@@ -118,8 +118,10 @@ def cancle_book(request, book_pk, product_pk):
     book.state = 0
     book.save()
 
-    return render(request, 'booking/book_detail.html', {
-        'book' : book,
-        'product' : product,
-        'hotel' : hotel,
-    })
+    # return render(request, 'booking/book_detail.html', {
+    #     'book' : book,
+    #     'product' : product,
+    #     'hotel' : hotel,
+    # })
+    
+    return redirect('hotel_accounts:profile', request.user)

@@ -1,4 +1,9 @@
 {% load bootstrap5 %}
+{% if reviews.count == 0 %}
+<div class="d-flex justify-content-center">
+    <h4> 리뷰가 없어요~ </h4>
+</div>
+{% endif %}
 <div class="row" style="width: 80%; margin: 0 auto;">
 {% if user.is_authenticated and user != hotel_info.user %}
     <form action="{% url 'hotel:create_review' hotel_info.pk %}" method="POST" style="margin-bottom: 1rem">

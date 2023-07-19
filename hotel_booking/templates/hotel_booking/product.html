@@ -1,4 +1,9 @@
 {% load humanize %}
+{% if products.count == 0 %}
+    <div class="d-flex justify-content-center">
+        <h4>등록된 상품이 없습니다.</h4>
+    </div>
+{% endif %}
 {% for product in products %}
 <div class="row">
     <div class="card mb-5" style="width: 80%; margin: 0 auto; padding: 0;">

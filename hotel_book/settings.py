@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-w7k^jn6jl#&v)f=m0!%$uw4bc-8i=7)9_%rrwzk$cchn*f8$qc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://f2c4-211-33-180-73.ngrok-free.app']
 
 # Application definition
 
@@ -47,7 +48,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.kakao',
 
     # 3rd
     'django_extensions',
@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'board',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',    
@@ -69,14 +69,14 @@ AUTHENTICATION_BACKENDS = [
 ]
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {'APP': {
-                        'client_id': 'qSWfCW2NqcqIR4COpXWE',
-                        'secret': env('SECRET_KEY'),
+                        'client_id': env('NAVER_CLIENT_ID'),
+                        'secret': env('NAVER_SECRET_KEY'),
                         'key': ''
                 }},
 
     'google': {'APP': {
-                        'client_id': '', 
-                        'secret': '', 
+                        'client_id': env('GOOGLE_CLIENT_ID'), 
+                        'secret': env('GOOGLE_SECRET_KEY'), 
                         'key': ''
                 }},
 
