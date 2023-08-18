@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
-<section class="container">
-    <h1>공지사항</h1>
-    <hr>
+<h1>공지사항</h1>
+<hr>
+{% for group in user.groups.all %}
+    {% include 'sidebar.html' %}
+{% endfor %}
+<div class="d-flex justify-content-center">
+    {% if boards.count == 0 %}
+        <h4>공지사항이 없습니다.</h4>
+    {% else %}
     <table class="table table-hover">
         <thead>
             <tr>
@@ -15,33 +19,34 @@
             </tr>
         </thead>
         <tbody>
-            {% for board in boards %}
-            <tr>
-                <th scorpe="row">{{ board.pk }}</th>
-                <td>
-                    <a href="{% url 'board:detail_board' board.pk %}">
-                        {{ board.title }}
-                    </a>
-                </td>
-                <td>
-                    {{ board.updated_at|date:'Y-m-d' }}
-                </td>
-                <td>
-                    {{ board.views }}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% for group in user.groups.all %}
-        {% if group.name == 'adminpage' %}
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
-            <a href="{% url 'board:create_board' %}">
-                <button class="btn btn-outline-dark">Write</button>
-            </a>
-        </div>
-        {% endif %}
-    {% endfor %}
-</section>
+                {% for board in boards %}
+                    <tr>
+                        <th scorpe="row">{{ board.pk }}</th>
+                        <td>
+                            <a href="{% url 'board:detail_board' board.pk %}">
+                                {{ board.title }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ board.updated_at|date:'Y-m-d' }}
+                        </td>
+                        <td>
+                            {{ board.views }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% for group in user.groups.all %}
+    {% if group.name == 'adminpage' %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+        <a href="{% url 'board:create_board' %}">
+            <button class="btn btn-outline-dark">Write</button>
+        </a>
+    </div>
+    {% endif %}
+{% endfor %}
 
 {% endblock content %}

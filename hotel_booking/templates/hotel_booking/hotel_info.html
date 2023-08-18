@@ -23,7 +23,11 @@
         {% endif %}
     </div>
     <div class="carousel-inner">
-        {% if hotel_infoes.count == 1 %}
+        {% if hotel_infoes.count == 0 %}
+        <div class='d-flex justify-content-center'>
+            <h4>등록된 호텔이 없어요~</h4>
+        </div>
+        {% elif hotel_infoes.count == 1 %}
             <div class="carousel-item active">
                 <a href="{% url 'hotel:detail_hotel_info' hotel_first.pk %}">
                     <img src="{{ hotel_first.image_thumbnail_home.url }}" class="d-block w-100" alt="{{ hotel_first.image_thumbnail_home }}">
@@ -68,24 +72,28 @@
     <hr>
 </div>
 {% if hotel_infoes.count == 0 %}
+<div class='d-flex justify-content-center'>
     <h3>등록된 호텔이 없어요.</h3>
+</div>
 {% else %}
 {% for hotel_info in hotel_infoes  %}
     <div class="card mb-3" style="width: 75%; float:right; margin-top: 1rem;">
-        <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
-        <div class="card-body">
-            <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
-                <h5 class="card-title"> {{ hotel_info.name }} </h5>
-            </a>
-            <p class="card-text">{{ hotel_info.score }} ({{hotel_info.reviews.count}})</p>
-            <hr>
-            <p class="card-text">{{ hotel_info.info }}</p>
-            <hr>
-            {% if hotel_info.price != 0 %}
-                <span>{{ hotel_info.price| intcomma }} 원</span>
-            {% else %}
-                <span>상품이 없습니다.</span>
-            {% endif %}
+        <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
+            <img src="{{ hotel_info.image_thumbnail.url }}" class="card-img-top" alt="{{ hotel_info.image_thumbnail }}">
+        </a>
+    <div class="card-body">
+        <a href="{% url 'hotel:detail_hotel_info' hotel_info.pk %}">
+            <h5 class="card-title"> {{ hotel_info.name }} </h5>
+        </a>
+        <p class="card-text">{{ hotel_info.score }} ({{hotel_info.reviews.count}})</p>
+        <hr>
+        <p class="card-text">{{ hotel_info.info }}</p>
+        <hr>
+        {% if hotel_info.price != 0 %}
+            <span>{{ hotel_info.price| intcomma }} 원</span>
+        {% else %}
+            <span>상품이 없습니다.</span>
+        {% endif %}
         </div>
     </div>
 {% endfor %}

@@ -6,14 +6,16 @@
 <section class="container">
     <h1>공지사항</h1>
     <hr>
-    <form method='POST'>
-        {% csrf_token %}
-        {% bootstrap_form board_form %}
-        
-        <div>
-            <button class="btn btn-outline-success">Register</button>
-        </div>
-    </form>
+    <div style="width: 90%; margin: 0 auto;">
+        <form method='POST'>
+            {% csrf_token %}
+            {% bootstrap_form board_form %}
+            
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-outline-dark">Register</button>
+            </div>
+        </form>
+    </div>
 </section>
 
 {% endblock content %}

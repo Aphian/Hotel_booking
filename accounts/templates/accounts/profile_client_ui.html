@@ -15,7 +15,7 @@
         {% for book in books %}
         <li class="list-group-item">
             <div>
-                <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
+                <a href="{% url 'hotel:detail_hotel_info' book.product.info.pk %}">
                     <h4>{{ book.product.info.name }} ({{ book.product.info.score }})</h4>
                 </a>
                 <p>{{ book.product.info.info }}</p>
@@ -33,22 +33,20 @@
                             <h6>이용 날짜 : {{ book.product.checkin|date:'Y.m.d' }} ~ {{ book.product.checkout|date:'Y.m.d' }}</h6>
                         </div>
                         {% if book.state == 0 %}
-                        <div class='d-flex justify-content-end'>
-                            <p>예약 상태 : 결제 대기</p>
-                        </div>
+                        <p>예약 상태 : 결제 대기</p>
                         <div class='d-flex justify-content-end'>
                             <a href="{% url 'booking:detail_book' book.pk book.product.pk %}">
-                                <button class="btn btn-outline-info">결제 하러 가기</button>
+                                <button class="btn btn-outline-dark">결제 하러 가기</button>
                             </a>
                             <a href="{% url 'booking:delete_book' book.pk book.product.pk %}" style="margin-left : 15px">
                                 <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>
                             </a>
                         </div>
                         {% elif book.state == 1 %}
-                        <p>예약 상태 : 예약 완료</p>
+                        <p>예약 상태 : 결제 완료</p>
                         <div class='d-flex justify-content-end'>
-                            <a href="{% url 'booking:delete_book' book.pk book.product.pk %}">
-                                <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">예약 취소</button>
+                            <a href="{% url 'booking:cancle_book' book.pk book.product.pk %}">
+                                <button class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">결제 취소</button>
                             </a>
                         </div>
                         {% endif %}

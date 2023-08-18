@@ -72,6 +72,7 @@ def delete_accounts(request, username):
         auth_logout(request) 
     return redirect('home')
 
+
 @login_required
 @require_http_methods(['GET', 'POST'])
 def profile(request, username):
@@ -98,6 +99,9 @@ def social_group(request):
     auth_login(request, user, backend='allauth.account.auth_backends.AuthenticationBackend')
     return redirect('home')
 
+
+@login_required
+@require_http_methods(['GET', 'POST'])
 def update_password(request, username):
     profile_user = get_object_or_404(User, username=username)
     context= {}
@@ -112,7 +116,7 @@ def update_password(request, username):
                 user.set_password(new_password)
                 user.save()
                 auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                return redirect("home")
+                return redirect("hotel_accounts:update_password", profile_user.username)
             else:
                 context.update({'error':"새로운 비밀번호를 다시 확인해주세요."})
                 error = context['error']

@@ -27,7 +27,7 @@ def index_book(request, username):
 @require_http_methods(['GET', 'POST'])
 def create_book(request, product_pk):
     product = get_object_or_404(HotelProduct, pk=product_pk)
-    hotel_info = HotelProduct.objects.filter(info_id=product.info_id)
+    hotel_info = get_object_or_404(HotelInfo, pk=product.info_id)
 
     if not request.user.groups.filter(name="client").exists():
         return redirect('home')
@@ -43,6 +43,15 @@ def create_book(request, product_pk):
             book.save()
             product.is_booked = 1
             product.save()
+
+            min_price = HotelProduct.objects.filter(Q(info_id=product.info_id) & Q(is_booked=0)).aggregate(min_price=Min("price"))
+            if min_price['min_price'] != None:
+                hotel_info.price = min_price['min_price']
+            else:
+                hotel_info.price = 0
+                
+            hotel_info.save()
+
             return redirect('booking:detail_book', book.pk, product_pk)
         
     return render(request, 'booking/book_form.html', {
@@ -83,6 +92,7 @@ def update_book(request, book_pk, product_pk):
 def delete_book(request, book_pk, product_pk):
     book = get_object_or_404(Book, pk=book_pk)
     product = get_object_or_404(HotelProduct, pk=product_pk)
+    hotel_info = get_object_or_404(HotelInfo, pk=product.info_id)
 
     if request.user != book.user:
         return redirect('booking:detail_book', book.pk, product_pk)
@@ -90,6 +100,10 @@ def delete_book(request, book_pk, product_pk):
     book.delete()
     product.is_booked = 0
     product.save()
+
+    min_price = HotelProduct.objects.filter(Q(info_id=product.info_id) & Q(is_booked=0)).aggregate(min_price=Min("price"))
+    hotel_info.price = min_price['min_price']
+    hotel_info.save()
 
     return redirect('hotel_accounts:profile', request.user)
 
@@ -104,8 +118,10 @@ def cancle_book(request, book_pk, product_pk):
     book.state = 0
     book.save()
 
-    return render(request, 'booking/book_detail.html', {
-        'book' : book,
-        'product' : product,
-        'hotel' : hotel,
-    })
+    # return render(request, 'booking/book_detail.html', {
+    #     'book' : book,
+    #     'product' : product,
+    #     'hotel' : hotel,
+    # })
+    
+    return redirect('hotel_accounts:profile', request.user)

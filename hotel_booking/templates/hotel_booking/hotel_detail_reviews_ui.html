@@ -1,30 +1,53 @@
 {% load bootstrap5 %}
+{% if reviews.count == 0 %}
+<div class="d-flex justify-content-center">
+    <h4> 리뷰가 없어요~ </h4>
+</div>
+{% endif %}
 <div class="row" style="width: 80%; margin: 0 auto;">
-    {% if user.is_authenticated and user != hotel_info.user %}
+{% if user.is_authenticated and user != hotel_info.user %}
     <form action="{% url 'hotel:create_review' hotel_info.pk %}" method="POST" style="margin-bottom: 1rem">
         {% csrf_token %}
         {% bootstrap_form review_form %}
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-success">작성</button>
+            <button class="btn btn-outline-dark">작성</button>
         </div>
     </form>
-    {% endif %}
     <hr>
     {% for review in reviews %}
-        <div class="card mb-3">
-            <div class="card-header"> {{ review.author.username }} - {{ review.score }}</div>
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p class="card-text">{{ review.content }}</p>
-                </blockquote>
-            </div>
+    <div class="card mb-3">
+        <div class="card-header"> {{ review.author.username }} - {{ review.score }}</div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p class="card-text">{{ review.content }}</p>
+            </blockquote>
             <hr>
-            {% if user == review.author %}
-                <form action="{% url 'hotel:delete_review' hotel_info.pk review.pk %}" method = "POST" style="margin-bottom: 2%; margin-left: 92%;">
-                    {% csrf_token %}
-                    <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
-                </form>
-            {% endif %}
         </div>
+        {% if user == review.author %}
+            <form action="{% url 'hotel:delete_review' hotel_info.pk review.pk %}" method = "POST" style="margin-bottom: 2%; margin-left: 92%;">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
+            </form>
+        {% endif %}
+    </div>
     {% endfor %}
+{% else %}
+    {% for review in reviews %}
+    <div class="card mb-3">
+        <div class="card-header"> {{ review.author.username }} - {{ review.score }}</div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p class="card-text">{{ review.content }}</p>
+            </blockquote>
+            <hr>
+        </div>
+        {% if user == review.author %}
+            <form action="{% url 'hotel:delete_review' hotel_info.pk review.pk %}" method = "POST" style="margin-bottom: 2%; margin-left: 92%;">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">Delete</button>
+            </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endif %}
 </div>

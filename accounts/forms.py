@@ -12,16 +12,20 @@ class CustomUserCreationForm(UserCreationForm):
         })
         
     )
+    name = forms.CharField(
+        min_length=2,
+        max_length=20,
+    )
 
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email', 'phone', )
+        fields = ('username', 'name', 'email', 'phone', )
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'phone')
+        fields = ('name', 'email', 'phone')
         labels = {
             'email': ('Email'),
             
